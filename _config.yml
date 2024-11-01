@@ -1,10 +1,10 @@
 # Site settings
-title: Freely Blog
-SEOTitle: 随意的博客 | Freely Blog
+title: KalosAner Blog
+SEOTitle: 随意的博客 | KalosAner Blog
 header-img: img/home-bg.jpg
 email: Freelypro@gmail.com
 description: "山穷水复疑无路，柳暗花明又一村。"
-keyword: "随意, Freely随意, Freely, 鬼栈, Freelypro, @Freelypro, 随意的博客, Freely Blog, 博客, 个人网站, 互联网, 后端"
+keyword: "KalosAner, KalosAner, @KalosAner, KalosAner的博客, KalosAner Blog, 博客, 个人网站, 互联网, 后端"
 url: "https://younotalone.github.io/" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
