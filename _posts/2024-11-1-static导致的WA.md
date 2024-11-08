@@ -1,0 +1,147 @@
+---
+layout:       post
+title:        "static导致的WA"
+author:       "kalos Aner"
+header-style: text
+catalog:      true
+tags:
+    - C++
+    - 算法
+---
+
+## static 导致的WA
+
+**问题：**
+
+在做力扣[3337. 字符串转换后的长度 II](https://leetcode.cn/problems/total-characters-in-string-after-transformations-ii/)的时候提交提示wrong answer，然后不进行任何修改的情况下把错误样例在本地运行一下发现是正确的。
+
+**原因：**
+
+经过测试发现是静态数据结构的问题。
+
+由于SIZE是静态常量，所以`array<int, SIZE>`定义出来的变量也是静态的。
+
+**解决：**
+
+如果需要用`array<int, SIZE>`来定义变量可以在变量名之后添加`{}`，如`array<int, SIZE> cnt{};`这样就算cnt是静态的，每次运行这段代码时也会直接清空里边的数据。
+
+**原来的代码：**
+
+```cpp
+class Solution {
+    static constexpr int SIZE = 26;
+    static constexpr int MOD = 1e9 + 7;
+
+    using Matrix = array<array<int, SIZE>, SIZE>;
+    using LL = long long;
+
+    Matrix mul(Matrix& a, Matrix& b) {
+        Matrix c{};
+        for (int i = 0; i < SIZE; ++ i) {
+            for (int j = 0; j < SIZE; ++ j) {
+                for (int k = 0; k < SIZE; ++ k) {
+                    c[i][j] = (c[i][j] + (LL) a[i][k] * b[k][j]) % MOD;
+                }
+            }
+        }
+        return c;
+    }
+
+    Matrix pos(Matrix a, int n) {
+        Matrix res{};
+        for (int i = 0; i < SIZE; ++ i) {
+            res[i][i] = 1;
+        }
+        while (n) {
+            if (n & 1) {
+                res = mul(res, a);
+            }
+            a = mul(a, a);
+            n >>= 1;
+        }
+        return res;
+    }
+
+public:
+    int lengthAfterTransformations(string s, int t, vector<int>& nums) {
+        Matrix m{};
+        for (int i = 0; i < SIZE; ++ i) {
+            for (int j = i + 1; j <= i + nums[i]; ++ j) {
+                m[i][j % SIZE] = 1;
+            }
+        }
+        m = pos(m, t);
+
+        array<int, SIZE> cnt;
+        for (char c : s) {
+            cnt[c - 'a'] += 1;
+        }
+        long long ans = 0;
+        for (int i = 0; i < SIZE; ++ i) {
+            ans += reduce(m[i].begin(), m[i].end(), 0LL) * cnt[i];
+        }
+        return ans % MOD;
+    }
+};
+```
+
+**正确的代码：**
+
+```cpp
+class Solution {
+    static constexpr int SIZE = 26;
+    static constexpr int MOD = 1e9 + 7;
+
+    using Matrix = array<array<int, SIZE>, SIZE>;
+    using LL = long long;
+
+    Matrix mul(Matrix& a, Matrix& b) {
+        Matrix c{};
+        for (int i = 0; i < SIZE; ++ i) {
+            for (int j = 0; j < SIZE; ++ j) {
+                for (int k = 0; k < SIZE; ++ k) {
+                    c[i][j] = (c[i][j] + (LL) a[i][k] * b[k][j]) % MOD;
+                }
+            }
+        }
+        return c;
+    }
+
+    Matrix pos(Matrix a, int n) {
+        Matrix res{};
+        for (int i = 0; i < SIZE; ++ i) {
+            res[i][i] = 1;
+        }
+        while (n) {
+            if (n & 1) {
+                res = mul(res, a);
+            }
+            a = mul(a, a);
+            n >>= 1;
+        }
+        return res;
+    }
+
+public:
+    int lengthAfterTransformations(string s, int t, vector<int>& nums) {
+        Matrix m{};
+        for (int i = 0; i < SIZE; ++ i) {
+            for (int j = i + 1; j <= i + nums[i]; ++ j) {
+                m[i][j % SIZE] = 1;
+            }
+        }
+        m = pos(m, t);
+
+        array<int, SIZE> cnt{};
+        for (char c : s) {
+            cnt[c - 'a'] += 1;
+        }
+        long long ans = 0;
+        for (int i = 0; i < SIZE; ++ i) {
+            ans += reduce(m[i].begin(), m[i].end(), 0LL) * cnt[i];
+        }
+        return ans % MOD;
+    }
+};
+```
+
