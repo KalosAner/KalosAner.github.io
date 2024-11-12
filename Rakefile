@@ -68,7 +68,7 @@ task :academic do
   puts "Creating new post: #{filename}"
   open(filename, 'w') do |academic|
     academic.puts "---"
-    academic.puts "layout: post"
+    academic.puts "layout: academic"
     academic.puts "title: \"#{title.gsub(/-/,' ')}\""
     academic.puts "subtitle: \"#{subtitle.gsub(/-/,' ')}\""
     academic.puts "date: #{date}"

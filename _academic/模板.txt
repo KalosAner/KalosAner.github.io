@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       academic
 title:        "Astar搜索算法"
 author:       "kalos Aner"
 header-style: text
