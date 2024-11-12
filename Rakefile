@@ -9,7 +9,7 @@ CONFIG = {
   'themes' => File.join(SOURCE, "_includes", "themes"),
   'layouts' => File.join(SOURCE, "_layouts"),
   'posts' => File.join(SOURCE, "_posts"),
-  'academic' => File.join(SOURCE, "_academic"),
+  'posts' => File.join(SOURCE, "_academic"),
   'post_ext' => "md",
   'theme_package_version' => "0.1.0"
 }
