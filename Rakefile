@@ -48,10 +48,10 @@ end # task :post
 
 
 # Usage: rake post title="A Title" subtitle="A sub title"
-desc "Begin a new post in #{CONFIG['academic']}"
+desc "Begin a new academic in #{CONFIG['academic']}"
 task :academic do
   abort("rake aborted: '#{CONFIG['academic']}' directory not found.") unless FileTest.directory?(CONFIG['academic'])
-  title = ENV["title"] || "new-post"
+  title = ENV["title"] || "new-academic"
   subtitle = ENV["subtitle"] || "This is a subtitle"
   slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   begin
@@ -65,7 +65,7 @@ task :academic do
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
 
-  puts "Creating new post: #{filename}"
+  puts "Creating new academic: #{filename}"
   open(filename, 'w') do |academic|
     academic.puts "---"
     academic.puts "layout: academic"
