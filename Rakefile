@@ -77,7 +77,7 @@ task :academic do
     academic.puts "tags: []"
     academic.puts "---"
   end
-end # task :post
+end # task :academic
 
 desc "Launch preview environment"
 task :preview do
