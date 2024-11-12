@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       academic
 title:        "npm安装bundle包时报错"
 author:       "kalos Aner"
 header-style: text
