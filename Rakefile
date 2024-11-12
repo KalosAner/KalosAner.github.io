@@ -49,7 +49,7 @@ end # task :post
 
 # Usage: rake post title="A Title" subtitle="A sub title"
 desc "Begin a new post in #{CONFIG['academic']}"
-task :post do
+task :academic do
   abort("rake aborted: '#{CONFIG['academic']}' directory not found.") unless FileTest.directory?(CONFIG['academic'])
   title = ENV["title"] || "new-post"
   subtitle = ENV["subtitle"] || "This is a subtitle"
@@ -66,16 +66,16 @@ task :post do
   end
 
   puts "Creating new post: #{filename}"
-  open(filename, 'w') do |post|
-    post.puts "---"
-    post.puts "layout: post"
-    post.puts "title: \"#{title.gsub(/-/,' ')}\""
-    post.puts "subtitle: \"#{subtitle.gsub(/-/,' ')}\""
-    post.puts "date: #{date}"
-    post.puts "author: \"Hux\""
-    post.puts "header-img: \"img/post-bg-2015.jpg\""
-    post.puts "tags: []"
-    post.puts "---"
+  open(filename, 'w') do |academic|
+    academic.puts "---"
+    academic.puts "layout: post"
+    academic.puts "title: \"#{title.gsub(/-/,' ')}\""
+    academic.puts "subtitle: \"#{subtitle.gsub(/-/,' ')}\""
+    academic.puts "date: #{date}"
+    academic.puts "author: \"Hux\""
+    academic.puts "header-img: \"img/post-bg-2015.jpg\""
+    academic.puts "tags: []"
+    academic.puts "---"
   end
 end # task :post
 
