@@ -88,6 +88,11 @@ service-worker: true
 # MathJax rendering for layout:page (e.g. post preview)
 page-mathjax: false
 
+collections:
+  academic:
+    output: true   # 确保生成 HTML 文件
+
+
 # Friends
 friends:
   [
