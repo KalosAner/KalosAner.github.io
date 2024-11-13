@@ -5,6 +5,9 @@ description: "「白日依山尽，黄河入海流。 欲穷千里目，更上�
 header-img: "img/post-bg-universe.jpg"
 ---
 
+{% assign academic_posts = site.academic | sort: 'date' %}
+{% assign paginator = academic_posts | paginate: 5 %}
+
 {% for post in paginator.posts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
