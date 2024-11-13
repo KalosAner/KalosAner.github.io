@@ -6,7 +6,7 @@ header-img: "img/post-bg-universe.jpg"
 ---
 
 {% assign academic_posts = site.academic | sort: 'date' %}
-{% assign paginator = academic_posts | paginate: 5 %}
+{% assign paginator = academic_posts %}
 
 {% for post in paginator.posts %}
 <div class="post-preview">
