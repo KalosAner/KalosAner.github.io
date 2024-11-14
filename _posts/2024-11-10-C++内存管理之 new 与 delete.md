@@ -1,16 +1,16 @@
 ---
 layout:       post
-title:        "C++内存管理"
+title:        "C++内存管理之 new 与 delete"
 author:       "kalos Aner"
 header-style: text
 catalog:      true
 tags:
     - C++
-
+    - 内存管理
 
 ---
 
-## C++内存管理
+## C++内存管理之 new 与 delete
 
 截止2010年之前Linux下的glibc中的malloc来自Doug Lea。
 
