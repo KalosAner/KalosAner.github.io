@@ -20,12 +20,14 @@ tags:
 
 本小节的目的就是要去除 `cookie`。
 
-![Snipaste_2024-11-15_21-31-22](\img\in-post\Snipaste_2024-11-15_21-31-22.png)![Snipaste_2024-11-16_21-38-46](\img\in-post\Snipaste_2024-11-16_21-38-46.png)
+![Snipaste_2024-11-15_21-31-22](\img\in-post\Snipaste_2024-11-15_21-31-22.png width = “50%”) width = “50%”![Snipaste_2024-11-16_21-38-46](\img\in-post\Snipaste_2024-11-16_21-38-46.png)
 
+```
 <figure class="half">
     <img src="\img\in-post\Snipaste_2024-11-15_21-31-22.png" width = “50%”/>
     <img src="\img\in-post\Snipaste_2024-11-16_21-38-46.png" width = “50%”/>
 </figure>
+```
 
 
 而 VC6 和 BC5 中的 `allocator` 只是以 `::operator new` 和 `::operator delete` 完成 `allocator()` 和 `deallocate()` 没有任何特殊设计，而且他们申请的内存以元素大小为单位(int)。
