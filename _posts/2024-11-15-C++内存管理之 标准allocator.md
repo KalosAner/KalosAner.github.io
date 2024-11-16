@@ -20,9 +20,11 @@ tags:
 
 本小节的目的就是要去除 `cookie`。
 
+![Snipaste_2024-11-15_21-31-22](\img\in-post\Snipaste_2024-11-15_21-31-22.png)![Snipaste_2024-11-16_21-38-46](\img\in-post\Snipaste_2024-11-16_21-38-46.png)
+
 <figure class="half">
-    <img src="\img\in-post\Snipaste_2024-11-15_21-31-22.png" width = “60%”>
-    <img src="\img\in-post\Snipaste_2024-11-16_21-38-46.png" width = “60%”>
+    <img src="\img\in-post\Snipaste_2024-11-15_21-31-22.png" width = “50%”/>
+    <img src="\img\in-post\Snipaste_2024-11-16_21-38-46.png" width = “50%”/>
 </figure>
 
 
