@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "Linux文件隐藏属性及chattr和lsattr命令"
-author:       "KalosAner"
+author:       "Kalos Aner"
 header-style: text
 catalog:      false
 tags:

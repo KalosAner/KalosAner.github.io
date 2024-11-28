@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "systemctl poweroff和直接使用poweroff有什么区别"
-author:       "KalosAner"
+author:       "Kalos Aner"
 header-style: text
 catalog:      false
 tags:

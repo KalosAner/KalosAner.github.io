@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "DOSBOX 快捷键及 MS-DOS 命令"
-author:       "KalosAner"
+author:       "Kalos Aner"
 header-style: text
 catalog:      false
 tags:

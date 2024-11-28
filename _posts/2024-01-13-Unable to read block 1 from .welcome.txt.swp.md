@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "Unable to read block 1 from .welcome.txt.swp"
-author:       "KalosAner"
+author:       "Kalos Aner"
 header-style: text
 catalog:      false
 tags:

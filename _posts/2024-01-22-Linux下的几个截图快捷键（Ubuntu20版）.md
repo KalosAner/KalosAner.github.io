@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "Linux下的几个截图快捷键（Ubuntu20版）"
-author:       "kalos Aner"
+author:       "Kalos Aner"
 header-style: text
 catalog:      true
 tags:

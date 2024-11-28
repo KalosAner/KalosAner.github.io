@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "PowerShell 提示“系统禁止运行脚本"
-author:       "kalos Aner"
+author:       "Kalos Aner"
 header-style: text
 catalog:      true
 tags:

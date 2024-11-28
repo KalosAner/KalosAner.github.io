@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "Linux的一些快捷键（hot keyboard）"
-author:       "kalos Aner"
+author:       "Kalos Aner"
 header-style: text
 catalog:      true
 tags:

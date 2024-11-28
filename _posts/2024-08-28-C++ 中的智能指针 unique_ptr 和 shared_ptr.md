@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "C++ 中的智能指针 unique_ptr 和 shared_ptr"
-author:       "kalos Aner"
+author:       "Kalos Aner"
 header-style: text
 catalog:      true
 tags:
