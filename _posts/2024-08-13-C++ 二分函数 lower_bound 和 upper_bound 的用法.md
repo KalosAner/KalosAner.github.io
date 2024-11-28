@@ -1,6 +1,6 @@
 ---
 layout:       post
-title:        "test"
+title:        "C++ 二分函数 lower_bound 和 upper_bound 的用法"
 author:       "Kalos Aner"
 header-style: text
 catalog:      true
