@@ -97,5 +97,5 @@ collections:
 friends:
   [
     { title: "黄玄", href: "https://huangxuan.me/" },
-    
+    { title: "本人之前的博客", href: "https://blog.csdn.net/MengYiKeNan?type=blog" },
   ]
