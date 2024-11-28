@@ -1,15 +1,16 @@
 ---
 layout:       post
-title:        "C++二分函数lower_bound和upper_bound的用法"
-author:       "KalosAner"
+title:        "C++ 二分函数 lower_bound 和 upper_bound 的用法"
+author:       "Kalos Aner"
 header-style: text
 catalog:      false
 tags:
     - C++
     - STL
+
 ---
 
-两者都是定义在头文件<algorithm>里。用**二分搜索**在一个有序数组中使用特定规则进行查找特定元素，时间复杂度就是O(logN)。
+两者都是定义在头文件`<algorithm>` 里。用**二分搜索**在一个有序数组中使用特定规则进行查找特定元素，时间复杂度就是 `O(logN)` 。
 
 **基础用法**
 
@@ -32,7 +33,7 @@ auto it = upper_bound(arr.begin(), arr.end(), x);
 int pos = upper_bound(arr.begin(), arr.end(), x) - arr.begin();
 ```
 
-**用greater<type>()重载**
+**用 `greater<type>()` 重载**
 
 在降序数组中查找特定元素。
 
