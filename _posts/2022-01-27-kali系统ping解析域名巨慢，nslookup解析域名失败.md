@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "kali系统ping解析域名巨慢，nslookup解析域名失败"
-author:       "KalosAner"
+author:       "Kalos Aner"
 header-style: text
 catalog:      false
 tags:

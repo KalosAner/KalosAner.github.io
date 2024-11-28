@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "RK-Keyboard 5.1 键盘详细配对方法"
-author:       "KalosAner"
+author:       "Kalos Aner"
 header-style: text
 catalog:      true
 tags:
