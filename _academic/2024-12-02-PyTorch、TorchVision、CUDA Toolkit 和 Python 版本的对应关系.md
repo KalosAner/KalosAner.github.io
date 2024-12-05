@@ -5,8 +5,7 @@ author:       "KalosAner"
 header-style: text
 catalog:      true
 tags:
-    - Conda
-    - python
+
 ---
 
 截至 PyTorch 2.1 发布时
