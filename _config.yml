@@ -92,27 +92,6 @@ collections:
   academic:
     output: true   # 确保生成 HTML 文件
 
-name: CI with Ruby
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build:
-    runs-on: self-hosted # 自托管运行器
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Ruby
-        run: |
-          ruby-build 3.1.4 /opt/hostedtoolcache/Ruby/3.1.4/x64
-          touch /opt/hostedtoolcache/Ruby/3.1.4/x64.complete
-
-      - name: Verify Ruby installation
-        run: |
-          /opt/hostedtoolcache/Ruby/3.1.4/x64/bin/ruby --version
 
 
 
