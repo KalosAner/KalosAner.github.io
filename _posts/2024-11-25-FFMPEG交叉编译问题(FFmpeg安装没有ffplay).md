@@ -5,7 +5,7 @@ author:       "x-terminal"
 header-style: text
 catalog:      false
 tags:
-    - ffmpeg
+    - FFmpeg
     - 转载
 
 ---

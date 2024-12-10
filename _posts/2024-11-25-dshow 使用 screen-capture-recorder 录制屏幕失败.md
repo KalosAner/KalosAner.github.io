@@ -5,7 +5,7 @@ author:       "KalosAner"
 header-style: text
 catalog:      false
 tags:
-    - ffmpeg
+    - FFmpeg
     - dshow
 
 ---
