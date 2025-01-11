@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <winsock2.h>
-//#pragma warning(disable:4996) 
+#pragma warning(disable:4996) 
 void ErrorHandling(char* message);
 
 int main(int argc, char* argv[])
