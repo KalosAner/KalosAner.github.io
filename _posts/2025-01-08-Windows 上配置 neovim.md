@@ -15,7 +15,7 @@ tags:
 
 ### 二、安装 packer.vim
 
-`Packer` 是 LunarVim 默认使用的插件管理器。
+`Packer.vim` 是 LunarVim 默认使用的插件管理器，只适用于 Neovim 0.5 之后的版本。
 
 进入 `C:\Users\<你的用户名>\AppData\Local\nvim-data` 中，创建文件夹 `\site\pack\packer\start\`，在该文件夹下执行 `git clone --depth 1 https://github.com/wbthomason/packer.nvim` 进行下载。
 

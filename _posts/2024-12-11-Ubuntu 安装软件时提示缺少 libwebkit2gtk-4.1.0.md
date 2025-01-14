@@ -25,3 +25,12 @@ sudo gdebi xxx.deb				#安装 deb文件
 #### 解决：
 
 也没啥解决的办法，只能下载依赖  `libwebkit2gtk-4.0-dev`  的版本了。
+
+找了一下，[clash-verge_1.7.6_amd64.deb](https://github.com/KalosAner/KalosAner.github.io/blob/master/resource/software/clash-verge_1.7.6_amd64.deb) 是比较新的可以安装在 Ubuntu20 上的版本。
+
+```sh
+sudo apt install libwebkit2gtk-4.0-dev
+# 需要手动下载安装包，然后在安装包所在的目录下执行以下语句
+sudo gdebi clash-verge_1.7.6_amd64.deb
+```
+
