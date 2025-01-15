@@ -58,7 +58,7 @@ nvim ~/.config/nvim/init.lua
 
 #### 附录
 
-我的配置
+我的配置如下，不过这个配置挺一般的，建议使用 [LunarVim](https://github.com/LunarVim/LunarVim) 或者 [LazyVim](https://github.com/LazyVim/LazyVim) 配置。
 
 ```lua
 -- 基础设置

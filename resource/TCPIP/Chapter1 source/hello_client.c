@@ -25,7 +25,12 @@ int main(int argc, char* argv[])
 	
 	memset(&serv_addr, 0, sizeof(serv_addr));
 	serv_addr.sin_family=AF_INET;
-	serv_addr.sin_addr.s_addr=inet_addr(argv[1]);
+	// serv_addr.sin_addr.s_addr=inet_addr(argv[1]);
+	if (inet_pton(AF_INET, argv[1], &(serv_addr.sin_addr)) != 1) {
+        printf("Invalid IP Address\n");
+        return 1;
+    }
+
 	serv_addr.sin_port=htons(atoi(argv[2]));
 		
 	if(connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr))==-1) 

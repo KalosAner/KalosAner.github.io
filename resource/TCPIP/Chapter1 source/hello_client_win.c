@@ -28,7 +28,11 @@ int main(int argc, char* argv[])
 	
 	memset(&servAddr, 0, sizeof(servAddr));
 	servAddr.sin_family=AF_INET;
-	servAddr.sin_addr.s_addr=inet_addr(argv[1]);
+	// servAddr.sin_addr.s_addr=inet_addr(argv[1]);
+	if (inet_pton(AF_INET, argv[1], &(servAddr.sin_addr)) != 1) {
+		printf("Invalid IP address\n");
+		return 1;
+	}
 	servAddr.sin_port=htons(atoi(argv[2]));
 	if(connect(hSocket, (SOCKADDR*)&servAddr, sizeof(servAddr))==SOCKET_ERROR)
 		ErrorHandling("connect() error!");
