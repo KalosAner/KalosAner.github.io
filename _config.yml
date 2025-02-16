@@ -99,7 +99,7 @@ collections:
 # Friends
 friends:
   [
-    { title: "黄玄", href: "https://huangxuan.me/" },
+    { title: "黄玄的博客", href: "https://huangxuan.me/" },
     { title: "本人CSDN", href: "https://blog.csdn.net/MengYiKeNan?type=blog" },
     { title: "本人力扣", href: "https://leetcode.cn/u/kalosaner/" },
     
