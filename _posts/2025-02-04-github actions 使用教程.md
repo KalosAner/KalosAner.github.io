@@ -1,6 +1,6 @@
 ---
 layout:       post
-title:        "github actions 使用教程"
+title:        "github actions 使用教程——使用 GitHub Actions 部署 react 项目到 GitHub Pages 上"
 author:       "KalosAner"
 header-style: text
 catalog:      true
