@@ -136,3 +136,9 @@ jobs:
 #### 6、其他
 
 GitHub Actions 还支持自动化生成 Docker 镜像并推送到 Docker 仓库里。
+
+除此之外，另一个开源的自动化服务器 Jenkins 也可以实现自动化 CI/CD。
+
+Jenkins 适合需要高度自定义、复杂的 CI/CD 流水线，或使用多种版本控制系统的团队。
+
+GitHub Actions 适合使用 GitHub 进行版本控制，寻求简单、快速集成的团队。
