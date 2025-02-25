@@ -51,6 +51,7 @@ plugins: [jekyll-paginate]
 markdown: kramdown
 
 kramdown:
+  tab_width: 4
   input: GFM # use Github Flavored Markdown !important
   syntax_highlighter: rouge
   syntax_highlighter_opts:
@@ -59,7 +60,6 @@ kramdown:
     block:
       line_numbers: true
       start_line: 1
-    tab_width: 4
 
 # Disqus settings
 disqus_username: freely-2
