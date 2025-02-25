@@ -1694,3 +1694,9 @@ img::-moz-selection {
 .no-scroll {
   overflow-y: hidden;
 }
+/* new */
+
+pre code {
+  tab-size: 4;
+  -moz-tab-size: 4;
+}
