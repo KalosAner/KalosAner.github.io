@@ -11,6 +11,14 @@ tags:
 
 ### 从requirements.txt安装依赖
 
+```
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+or
+
+conda install --file requirements.txt
+```
+
+
 
 加上后面的 -i https://pypi.tuna.tsinghua.edu.cn/simple 的作用是指定清华大学的镜像，下载速度更快。

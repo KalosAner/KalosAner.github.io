@@ -2,6 +2,7 @@
 layout:       post
 title:        "KalosAner 的奇妙发现"
 author:       "KalosAner"
+top: 1
 header-style: text
 catalog:      false
 tags:
