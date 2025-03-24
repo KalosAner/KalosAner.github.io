@@ -37,7 +37,7 @@ tags:
 
 一般来说是以 AVR 单片机为首的集成电路板就叫 Arduino（当然后面还有用STM32或者其他单片机开发的非官方版，这里就不一一阐述了）。提一点，STM32 的成本性价比最高。
 
-![img](C:\Users\Administrator\Documents\github.io\KalosAner.github.io\img\in-post\Reprint\7e1b664b6abf6c56e42cf5c75d422451.png)
+![img](\img\in-post\Reprint\7e1b664b6abf6c56e42cf5c75d422451.png)
 
  
 
@@ -49,7 +49,7 @@ Arduino SKD有很多现成的库函数，用于对硬件层的控制。
 
 开发者通过调用库函数就能轻易地使用AVR这个芯片的功能，然后通过不同程序去实现不同的硬件控制，比如说控制灯、继电器、电机、蜂鸣器之类的。
 
-![img](C:\Users\Administrator\Documents\github.io\KalosAner.github.io\img\in-post\Reprint\021eeff20f58b45a8ec814e48be95948.png)
+![img](\img\in-post\Reprint\021eeff20f58b45a8ec814e48be95948.png)
 
  
 
@@ -71,7 +71,7 @@ Arduino一般是用于给你学习和提升c语言用的，通过这个平台你
 
 ARM指的是一种处理器架构。单片机一个大类，包括很多架构，ARM是其中一种架构（这里特指ARM7和现在的Cortex-M系列）。除了ARM，还有8051，AVR，PIC等架构。
 
-![img](C:\Users\Administrator\Documents\github.io\KalosAner.github.io\img\in-post\Reprint\6f21bed302dc9a6478939ee50ed451b1.png)
+![img](\img\in-post\Reprint\6f21bed302dc9a6478939ee50ed451b1.png)
 
 前面我们把**Arduino比作是大众，树莓派是保时捷，那arm就是一个V12发动机**。
 
@@ -107,7 +107,7 @@ ARM内核也分很多个版本，ARM7、ARM9、ARM11，到了ARM11以后就是�
 
 
 
-![img](C:\Users\Administrator\Documents\github.io\KalosAner.github.io\img\in-post\Reprint\ecbccd5a0df1b88312a0da4a54578fad.png)
+![img](\img\in-post\Reprint\ecbccd5a0df1b88312a0da4a54578fad.png)
 
 Cortex架构也分三个系列性能从低到高：M、R、A。
 
@@ -125,7 +125,7 @@ Cortex-A定位是通用市场，典型的就是平板电脑、手机、数字电
 
 
 
-![img](C:\Users\Administrator\Documents\github.io\KalosAner.github.io\img\in-post\Reprint\91d2bb427c54c667754da6581d4eaaed.jpeg)
+![img](\img\in-post\Reprint\91d2bb427c54c667754da6581d4eaaed.jpeg)
 
 树莓派性能比Arduino要强悍很多，树莓派用的是ARM内核处理器，接上鼠标和键盘就可以当迷你电脑一样用。
 
@@ -143,7 +143,7 @@ Cortex-A定位是通用市场，典型的就是平板电脑、手机、数字电
 
 单片机就是一个芯片，品牌和型号都很多，比如GD、ST、TI、STC、新唐、NXP等等太多了。
 
-![img](C:\Users\Administrator\Documents\github.io\KalosAner.github.io\img\in-post\Reprint\2c464ca98dc39df78df905cd539f99f2.png)
+![img](\img\in-post\Reprint\2c464ca98dc39df78df905cd539f99f2.png)
 
 单片机需要做电路和程序的二次开发才能实现一个完整的电子产品功能。
 
@@ -159,13 +159,13 @@ Arduino就是相当于用AVR的单片机帮你做好底层硬件和基础单片�
 
 从产品的角度，单片机也比Arduino应用更加广泛。
 
-![img](C:\Users\Administrator\Documents\github.io\KalosAner.github.io\img\in-post\Reprint\e338d3a0bc256b71d6d9063428833efa.png)
+![img](\img\in-post\Reprint\e338d3a0bc256b71d6d9063428833efa.png)
 
 **单纯学Arduino基本没什么就业方向，Arduino打c语言基础，需要继续往树莓派学习，主要往Linux应用开发。时代在变化，现在越来越多继续A芯片的开发板子越来越多，例如高端的NVIDIA Jetson 这种在识别率和请求相应速度上要高出很多（就是一点：价格很贵），当然随着鸿蒙OS的崛起，华为海思的开发板也越来越应用普遍（场景+生态+能力赋能将会是Iot江湖的新商业模式）**
 
  
 
-![img](C:\Users\Administrator\Documents\github.io\KalosAner.github.io\img\in-post\Reprint\1a95c3d84165ea09b7692b7e0bc86d33.png)
+![img](\img\in-post\Reprint\1a95c3d84165ea09b7692b7e0bc86d33.png)
 
  **【简单地总结】**
 
