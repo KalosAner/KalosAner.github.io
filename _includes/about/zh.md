@@ -33,15 +33,15 @@
 
 ### 略读
 
-《鸟哥的 Linux 私房菜》
+《鸟哥的 Linux 私房菜》鸟哥
 
 《Linux高性能服务器编程》
 
 ### 精读
 
-《C++ primer》
+《C++ primer》中文版（第 5 版）Stanley B. Lippman
 
-
+《汇编语言》（第 3 版） 王爽
 
 # 开源项目和作品
 

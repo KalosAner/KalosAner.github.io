@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2025-01-11-套接字、协议族与地址族.md",
+                "file": "2025-01-09-Visual Studio 2022 修改字体和背景颜色.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-01-11-套接字、协议族与地址族"
+              "title": "2025-01-09-Visual Studio 2022 修改字体和背景颜色"
             }
           }
         ]
@@ -40,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabeticalReverse"
+                "sortOrder": "alphabeticalReverse",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -164,10 +165,31 @@
   },
   "active": "c3c31c101afccd8d",
   "lastOpenFiles": [
-    "2025-01-12-Arduino、arm、树莓派、单片机四者区别和关系.md",
-    "2025-01-11-套接字、协议族与地址族.md",
+    "2025-01-08-Windows 上配置 neovim.md",
     "2025-01-07-Visual Studio 同时启动多个项目.md",
-    "2025-01-12-stm32、esp32、arduino、单片机和树莓派之间的关系.md",
-    "2025-01-13-Ubuntu 上安装配置 neovim.md"
+    "2025-01-04-线段树模板.md",
+    "2024-12-30-设计模式(六).md",
+    "2024-12-29-设计模式(五).md",
+    "2024-12-28-设计模式(四).md",
+    "2024-12-27-台式机设置来电自动开机.md",
+    "2024-12-26-Windows 类标识符.md",
+    "2024-12-25-Github 快捷键.md",
+    "2024-12-20-设计模式(三).md",
+    "2024-12-18-设计模式(二).md",
+    "2024-12-17-Cookie, Session, Token简单总结.md",
+    "2024-12-15-Vim 基础系统教程.md",
+    "2024-12-11-Ubuntu 安装软件时提示缺少 libwebkit2gtk-4.1.0.md",
+    "2024-12-11-Docker 基础用法.md",
+    "2024-12-11-开了 VPN 浏览器可以访问 google 但是 ping google 失败.md",
+    "2024-12-08-mingw64 配置 easyx 环境.md",
+    "2024-12-08-Linux ubuntu 时间日期设置.md",
+    "2024-12-07-github pages 的 workflow 突然运行失败.md",
+    "2024-12-05-vscode 运行 ipynb 代码输出结果不全.md",
+    "2024-12-04-彻底理解 IO 多路复用实现机制.md",
+    "2024-12-02-PyTorch、TorchVision、CUDA Toolkit 和 Python 版本的对应关系.md",
+    "2024-12-02-Python运行requirements.txt 文件安装包.md",
+    "2024-12-02-Linux网络操作的通用接口：Socket到底是怎么使用的？.md",
+    "2024-12-02-Conda创建虚拟环境并安装Pytorch.md",
+    "2024-11-29-设计模式(一).md"
   ]
 }
