@@ -271,5 +271,16 @@ if (idx == WAIT_IO_COMPLETION) {
 WSACloseEvent(evObj);
 closesocket(hSocket);
 WSACleanup();
+
+
+
+void CLABACK CompRoutine(DWORD dwError, DWORD szRecvBytes, LPWSAOVERLAPPED lpOverlapped, DWORD flags) {
+    if (dwError != 0) {
+        ErrorHandling("CompRoutine error");
+    } else {
+        recvBytes = szRecvBytes;
+        printf("Received message: %s \n", buf);
+    }
+}
 ```
 
