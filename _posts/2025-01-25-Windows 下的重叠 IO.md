@@ -75,11 +75,11 @@ int WSASend(SOCKET s, LPWSABUF lpBuffers, DWORD dwBufferCount, LPDWORD lpNumberO
 
 `dwBufferCount`：WSABUF 数组的长度
 
-`lpNumberOfBytesSent`：传出参数，用于保存实际发送的字节数，在**同步模式**下（未使用重叠I/O），该参数需有效指针以返回结果；在**异步模式**下（使用 `lpOverlapped`），因未完成操作导致错误结果然后判断错误结果来确认传输是否完成；也可以设为 `NULL`，这样就不会返回错误结果
+`lpNumberOfBytesSent`：传出参数，用于保存实际发送的字节数，在**同步模式**下（未使用重叠I/O），该参数需有效指针以返回结果；在**异步模式**下（使用 `lpOverlapped`），因未完成操作导致错误结果然后判断错误结果来确认传输是否完成；也可以设为 `NULL`，这样就不会返回错误结果。
 
 `dwFlags`：更改数据传输特性，`MSG_OOB`：发送带外数据，`MSG_DONTROUTE`：绕过路由表直接发送
 
-`lpOverlapped`：指向重叠I/O操作的结构体，用于异步发送。
+`lpOverlapped`：指向重叠I/O操作的结构体，用于异步发送。该结构体包含事件对象句柄，当发送完成后该事件对象句柄将被触发。若套接字未启用重叠模式（非异步），此参数被忽略。
 
 `lpCompletionRoutine`：异步操作完成时触发的回调函数。若未使用回调机制，应设为 `NULL`。
 
@@ -137,11 +137,11 @@ int WSARecv(SOCKET s, LPWSABUF lpBuffers, DWORD dwBfuuerCount, LPDWORD lpNumberO
 
 `dwBufferCount`：WSABUF 数组的长度
 
-`lpNumberOfBytesRecvd`：传出参数，若操作**立即完成**，返回实际接收的字节数；若为**异步操作**（`lpOverlapped` 非空），应设为 `NULL` 以避免错误结果
+`lpNumberOfBytesRecvd`：传出参数，用于保存实际发送的字节数，在**同步模式**下（未使用重叠I/O），该参数需有效指针以返回结果；在**异步模式**下（使用 `lpOverlapped`），因未完成操作导致错误结果然后判断错误结果来确认传输是否完成；也可以设为 `NULL`，这样就不会返回错误结果。
 
-`lpFlags`：控制接收行为的标志位，例如：`MSG_PUSH_IMMEDIATE`：立即推送数据；`MSG_PARTIAL`：允许部分接收（面向消息的协议）
+`lpFlags`：控制接收行为的标志位，例如：`MSG_PUSH_IMMEDIATE`：立即推送数据；`MSG_PARTIAL`：允许部分接收（面向消息的协议）。
 
-`lpOverlapped`：指向重叠 I/O 结构的指针，用于异步操作。若套接字未启用重叠模式（非异步），此参数被忽略
+`lpOverlapped`：指向重叠 I/O 结构的指针，用于异步操作。该结构体包含事件对象句柄，当接收完成后该事件对象句柄将被触发。若套接字未启用重叠模式（非异步），此参数被忽略。
 
 `lpCompletionRoutine`：异步操作完成时调用的回调函数。仅在重叠 I/O 模式下有效，非异步操作需设为 `NULL`。
 
