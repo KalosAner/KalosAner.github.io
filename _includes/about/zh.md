@@ -12,7 +12,6 @@
  - CSDN：[https://blog.csdn.net/MengYiKeNan?type=blog](https://blog.csdn.net/MengYiKeNan?type=blog)
  - 力扣：[https://leetcode.cn/u/kalosaner/](https://leetcode.cn/u/kalosaner/)
  - Github：[https://github.com/KalosAner](https://github.com/KalosAner)
-
  - 期望职位：C++程序员
 
 ## 奖项
@@ -23,11 +22,12 @@
 以下均为我熟练使用的技能
 
 - 熟悉C++语言
-- 了解Linux下C语言编程，数据结构，网络编程，多线程编程，多进程编程，内存管理，设计模式
+- 了解 Linux 下C/C++编程，数据结构，网络编程，多线程编程，多进程编程，设计模式
 - 熟悉 TCP/IP 协议，可以实现端到端的数据发送
+- 了解 I/O 多路复用，可以高效处理 I/O 问题
+- 熟悉内存管理的细节，了解 allocator 和 malloc 申请内存的方法
 - 了解 git、MySQL、Linux、docker、cmake、C++STL 库等工具的使用方法
-- 担任过班长，拥有一定的沟通和表达能力
-      
+- 担任过班长，拥有较强的沟通和表达能力
 
 # 书籍
 
@@ -35,7 +35,7 @@
 
 《鸟哥的 Linux 私房菜》鸟哥
 
-《Linux高性能服务器编程》
+《Linux高性能服务器编程》游双
 
 ### 精读
 
@@ -44,6 +44,8 @@
 《汇编语言》（第 3 版） 王爽
 
 《TCP/IP网络编程》尹圣雨
+
+《编程珠玑》（第 2 版）[美\] Jon Bentley
 
 # 开源项目和作品
 
