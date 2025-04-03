@@ -1,6 +1,6 @@
 ---
 layout:       post
-title:        "IOCP：Windows下性能最好的 IO 模型"
+title:        "IOCP：Windows下性能最好的 I/O 模型"
 author:       "KalosAner"
 header-style: text
 catalog:      true
@@ -13,7 +13,9 @@ tags:
 
 ### 一、引言
 
-如果已经了解 重叠 IO 的话再理解 IOCP（Input Output Completion Port）就会容易很多。IOCP 的基本流程就是第一步创建一个 IOCP 对象，该对象可以连接很多网络套接字；第二步就是把需要进行 IO 的套接字连接到刚创建好的 IOCP 对象上，这样传输到这些网络套接字的数据都会进入一个缓冲区队列中；第三步就是创建多个线程，每个线程都通过 `GetQueuedCompletionStatus` 函数得到缓冲区队列中的数据。
+如果已经了解 重叠 IO 的话再理解 IOCP（Input Output Completion Port）就会容易很多。IOCP 的基本流程就是第一步创建一个 IOCP 对象，该对象可以连接很多网络套接字；第二步就是把需要进行 I/O 的套接字连接到刚创建好的 IOCP 对象上，这样传输到这些网络套接字的数据都会进入一个缓冲区队列中；第三步就是创建多个线程，每个线程都通过 `GetQueuedCompletionStatus` 函数得到缓冲区队列中的数据。
+
+> IOCP 是一种异步非阻塞 I/O 模型。
 
 ### 二、创建 IOCP 对象
 
