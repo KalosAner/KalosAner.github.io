@@ -56,7 +56,12 @@
 ## 技术文章
 
 - [套接字、协议族与地址族](https://kalosaner.github.io/2025/01/11/%E5%A5%97%E6%8E%A5%E5%AD%97-%E5%8D%8F%E8%AE%AE%E6%97%8F%E4%B8%8E%E5%9C%B0%E5%9D%80%E6%97%8F/)
+
 - [写作与不写作(翻译文章)](https://kalosaner.github.io/2025/01/20/Writes-and-Write-Nots/) 
+
+- [C++ struct 对齐规则](https://kalosaner.github.io/2025/03/23/C++-struct-%E5%AF%B9%E9%BD%90%E8%A7%84%E5%88%99/)
+
+- 
 
     
   
