@@ -1,6 +1,6 @@
 
 # 联系方式
-- Email：mengyikenan6@gmail.com
+- Email：546174624@qq.com  or  mengyikenen6@gmail.com
 - 微信号：KalosAner
 
 
@@ -15,7 +15,7 @@
  - 期望职位：C++程序员
 
 ## 奖项
-本科在校期间获得两次国家奖学金、全国大学生数学建模全国二等奖、ICPC西部赛二等奖、蓝桥杯国三、省优秀三好学生
+本科在校期间获得两次国家奖学金、全国大学生数学建模全国二等奖、ICPC西部赛二等奖、蓝桥杯国三、省优秀三好学生、华为软件精英挑战赛复赛二等奖
       
 # 技能清单
 
@@ -25,6 +25,7 @@
 - 了解 Linux 下C/C++编程，数据结构，网络编程，多线程编程，多进程编程，设计模式
 - 熟悉 TCP/IP 协议，可以实现端到端的数据发送
 - 了解 I/O 多路复用，可以高效处理 I/O 问题
+- 了解 Windows 异步 I/O，会使用 IOCP 模型
 - 熟悉内存管理的细节，了解 allocator 和 malloc 申请内存的方法
 - 了解 git、MySQL、Linux、docker、cmake、C++STL 库等工具的使用方法
 - 担任过班长，拥有较强的沟通和表达能力
@@ -51,7 +52,7 @@
 
 ## 开源项目
 
-  - [暂无](http://github.com/yourname/projectname)：项目的简要说明，Star和Fork数多的可以注明
+  - [C++ 高并发服务器](https://github.com/KalosAner/WebServer)：动态线程池，读取本地配置，持续更新
 
 ## 技术文章
 
@@ -60,6 +61,10 @@
 - [写作与不写作(翻译文章)](https://kalosaner.github.io/2025/01/20/Writes-and-Write-Nots/) 
 
 - [C++ struct 对齐规则](https://kalosaner.github.io/2025/03/23/C++-struct-%E5%AF%B9%E9%BD%90%E8%A7%84%E5%88%99/)
+
+- [Linux 信号机制](https://kalosaner.github.io/2025/03/26/Linux-%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/)
+
+- [僵尸进程和孤儿进程](https://kalosaner.github.io/2025/03/25/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%AD%A4%E5%84%BF%E8%BF%9B%E7%A8%8B/)
 
 - 
 
