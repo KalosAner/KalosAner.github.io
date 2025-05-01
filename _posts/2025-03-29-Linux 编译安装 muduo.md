@@ -69,73 +69,97 @@ mv * /usr/local/lib/
 
 #### 四、测试
 
+回声客户端
+
 ```cpp
+/*
+    muduo 主要提供两个主要的类：
+    TcpServer : 用于编写服务端程序
+    TcpServer : 用于编写客户端程序
+
+    epoll + 线程池
+    好处：能够把网络 I/O 的代码和业务代码区分开
+
+*/
+
 #include <muduo/net/TcpServer.h>
-#include <muduo/base/Logging.h>
-#include <boost/bind.hpp>
 #include <muduo/net/EventLoop.h>
- 
-// 使用muduo开发回显服务器
-class EchoServer
+#include <iostream>
+#include <functional>
+
+using namespace std;
+using namespace muduo;
+using namespace muduo::net;
+using namespace placeholders;
+
+/*
+基于 muduo 网络库开发服务器程序步骤：
+1、组合 TcpServer 对象
+2、创建 EventLoop 时间循环对象的指针
+3、明确 TCPServer 构造函数需要什么参数，输出 ChatServer 的构造函数
+4、在当前服务器类的构造函数当中，注册处理连接的回调函数和处理读写事件的回调函数
+5、设置合适的服务端线程数量，muduo 会自己分配 IO 线程和 work 线程
+*/
+
+class ChatServer
 {
- public:
-  EchoServer(muduo::net::EventLoop* loop,
-             const muduo::net::InetAddress& listenAddr);
- 
-  void start(); 
- 
- private:
-  void onConnection(const muduo::net::TcpConnectionPtr& conn);
- 
-  void onMessage(const muduo::net::TcpConnectionPtr& conn,
-                 muduo::net::Buffer* buf,
-                 muduo::Timestamp time);
- 
-  muduo::net::TcpServer server_;
+public:
+    ChatServer(EventLoop *loop,               // 反应堆
+               const InetAddress &listenAddr, // IP + port
+               const string &nameArg) :       // 服务器名字
+                                        _server(loop, listenAddr, nameArg), _loop(loop)
+    {
+        // 注册用户连接和断开的回调
+        _server.setConnectionCallback(std::bind(&ChatServer::onConnection, this, _1));
+        // 注册用户读写时间的回调
+        _server.setMessageCallback(std::bind(&ChatServer::onMessage, this, _1, _2, _3));
+
+        // 设置服务器端线程数
+        _server.setThreadNum(4); // 其中1个是 IO 线程，3个工作线程
+    }
+
+    void start()
+    {
+        _server.start();
+    }
+
+private:
+    // 处理用户连接的创建和断开
+    void onConnection(const TcpConnectionPtr &conn)
+    {
+        if (conn->connected())
+        {
+            cout << conn->peerAddress().toIpPort() << "->" << conn->localAddress().toIpPort() << " :Online" << endl;
+        }
+        else
+        {
+            cout << conn->peerAddress().toIpPort() << "->" << conn->localAddress().toIpPort() << " :Offline" << endl;
+            conn->shutdown();
+            // _loop->quit();
+        }
+    }
+
+    void onMessage(const TcpConnectionPtr &conn, Buffer *buffer, Timestamp time)
+    {
+        string buf = buffer->retrieveAllAsString();
+        cout << "recv data:" << buf << " time:" << time.toString() << endl;
+        conn->send(buf);
+    }
+
+    TcpServer _server;
+    EventLoop *_loop;
 };
- 
-EchoServer::EchoServer(muduo::net::EventLoop* loop,
-                       const muduo::net::InetAddress& listenAddr)
-  : server_(loop, listenAddr, "EchoServer")
-{
-  server_.setConnectionCallback(
-      boost::bind(&EchoServer::onConnection, this, _1));
-  server_.setMessageCallback(
-      boost::bind(&EchoServer::onMessage, this, _1, _2, _3));
-}
- 
-void EchoServer::start()
-{
-  server_.start();
-}
- 
-void EchoServer::onConnection(const muduo::net::TcpConnectionPtr& conn)
-{
-  LOG_INFO << "EchoServer - " << conn->peerAddress().toIpPort() << " -> "
-           << conn->localAddress().toIpPort() << " is "
-           << (conn->connected() ? "UP" : "DOWN");
-}
- 
-void EchoServer::onMessage(const muduo::net::TcpConnectionPtr& conn,
-                           muduo::net::Buffer* buf,
-                           muduo::Timestamp time)
-{
-  // 接收到所有的消息，然后回显
-  muduo::string msg(buf->retrieveAllAsString());
-  LOG_INFO << conn->name() << " echo " << msg.size() << " bytes, "
-           << "data received at " << time.toString();
-  conn->send(msg);
-}
- 
- 
+
 int main()
 {
-  LOG_INFO << "pid = " << getpid();
-  muduo::net::EventLoop loop;
-  muduo::net::InetAddress listenAddr(8888);
-  EchoServer server(&loop, listenAddr);
-  server.start();
-  loop.loop();
+    EventLoop loop; // epoll
+    InetAddress addr("127.0.0.1", 6000);
+    ChatServer server(&loop, addr, "ChatServer");
+
+    server.start();   // listenfd epoll_ctl => epoll
+    loop.loop();      // epoll_wait 以阻塞方式等待新用户连接
+
+    return 0;
 }
 ```
 
@@ -149,6 +173,9 @@ g++ muduoTest.cpp -lmuduo_net -lmuduo_base -lpthread -std=c++11 -o muduoTest
 客户端输入
 
 ```sh
-echo "hello world" | nc localhost 8888
+telnet 127.0.0.1 6000
+
+# telnet 退出
+Ctrl + ]
 ```
 
