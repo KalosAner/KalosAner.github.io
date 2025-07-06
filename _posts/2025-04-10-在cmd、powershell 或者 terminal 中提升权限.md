@@ -5,7 +5,7 @@ author:       "佚名"
 header-style: text
 catalog:      true
 tags:
-    - Windowsr
+    - Windows
     - 转载
 
 
