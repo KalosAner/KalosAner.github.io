@@ -20,12 +20,12 @@ windows 系统，浏览器可以访问 github.com，但是 `ssh -T git@github.co
 
 ```
 Host github.com
-	Hostname ssh.github.com
-	Port 443
+Hostname ssh.github.com
+Port 443
+User git
 ```
 
 并且确保 `~/.ssh` 里边没有 `known_hosts` 文件。
-
 
 
 #### 其他：
