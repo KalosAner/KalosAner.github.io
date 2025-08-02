@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2025-01-09-Visual Studio 2022 修改字体和背景颜色.md",
+                "file": "2025-08-01-git 本地仓库添加和修改远程仓库.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-01-09-Visual Studio 2022 修改字体和背景颜色"
+              "title": "2025-08-01-git 本地仓库添加和修改远程仓库"
             }
           }
         ]
@@ -165,6 +165,8 @@
   },
   "active": "c3c31c101afccd8d",
   "lastOpenFiles": [
+    "2025-08-02-设置 macbook iTerm2 终端 ls 显示颜色.md",
+    "2025-01-09-Visual Studio 2022 修改字体和背景颜色.md",
     "2025-01-08-Windows 上配置 neovim.md",
     "2025-01-07-Visual Studio 同时启动多个项目.md",
     "2025-01-04-线段树模板.md",
@@ -188,8 +190,6 @@
     "2024-12-04-彻底理解 IO 多路复用实现机制.md",
     "2024-12-02-PyTorch、TorchVision、CUDA Toolkit 和 Python 版本的对应关系.md",
     "2024-12-02-Python运行requirements.txt 文件安装包.md",
-    "2024-12-02-Linux网络操作的通用接口：Socket到底是怎么使用的？.md",
-    "2024-12-02-Conda创建虚拟环境并安装Pytorch.md",
-    "2024-11-29-设计模式(一).md"
+    "2024-12-02-Linux网络操作的通用接口：Socket到底是怎么使用的？.md"
   ]
 }
