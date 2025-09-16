@@ -1,5 +1,16 @@
+---
+layout:       post
+title:        "修改终端前缀颜色（Linux 和 Mac OS）"
+author:       "KalosAner"
+header-style: text
+catalog:      true
+tags:
+    - 终端
+
+---
 
 #### Linux
+
 1、进入 `root` 模式 `sudo su`
 2、打开 `/root/.bashrc` 这个文件 `vim /root/.bashrc`
 3、找到下面这段内容

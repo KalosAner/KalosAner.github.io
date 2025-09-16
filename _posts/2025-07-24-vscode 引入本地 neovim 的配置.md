@@ -1,3 +1,14 @@
+---
+layout:       post
+title:        "vscode 引入本地 neovim 的配置"
+author:       "KalosAner"
+header-style: text
+catalog:      true
+tags:
+    - Visual Studio
+    - Vim
+
+---
 #### 需求：
 让 vscode 的编辑框支持 neovim 的操作，包括快捷键之类的。本地已经配置过 neovim，现在想通过引入本地的配置实现。
 

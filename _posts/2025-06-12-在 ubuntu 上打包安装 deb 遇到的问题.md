@@ -1,3 +1,13 @@
+---
+layout:       post
+title:        "在 ubuntu 上打包安装 deb 遇到的问题"
+author:       "KalosAner"
+header-style: text
+catalog:      true
+tags:
+    - Linux
+
+---
 环境：ubuntu aarch64
 
 #### 文件结构

@@ -5,7 +5,7 @@ author:       "KalosAner"
 header-style: text
 catalog:      true
 tags:
-    - iTerm2
+    - 终端
 
 
 ---
