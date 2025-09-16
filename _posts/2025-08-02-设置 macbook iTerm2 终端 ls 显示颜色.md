@@ -9,7 +9,7 @@ tags:
 
 
 ---
-
+git@github.com:plctlab/riscv-operating-system-mooc.git
 #### 问题：
 
 MacBook 上的 iTerm2 是 MacBook 比较好用的终端，但是 MacBook 的 ls 指令不支持显示颜色。
