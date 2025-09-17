@@ -14,6 +14,7 @@ tags:
 1、进入 `root` 模式 `sudo su`
 2、打开 `/root/.bashrc` 这个文件 `vim /root/.bashrc`
 3、找到下面这段内容
+
 ```sh
 if [ "$color_prompt" = yes ]; then
 	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
@@ -44,6 +45,7 @@ fi
 | **青色**   | `\e[0;36m` |
 | **加粗**   | `\e[1m`    |
 | **重置颜色** | `\e[0m`    |
+
 注意：**颜色代码必须用`\[`和`\]`包裹**，避免终端换行计算错误。
 
 #### MacOS
