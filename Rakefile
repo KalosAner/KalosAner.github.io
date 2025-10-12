@@ -10,6 +10,7 @@ CONFIG = {
   'layouts' => File.join(SOURCE, "_layouts"),
   'posts' => File.join(SOURCE, "_posts"),
   'academic' => File.join(SOURCE, "_academic"),
+  'notes' => File.join(SOURCE, "_notes"),
   'post_ext' => "md",
   'theme_package_version' => "0.1.0"
 }
