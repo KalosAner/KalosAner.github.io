@@ -94,7 +94,6 @@ page-mathjax: false
 collections:
   academic:
     output: true   # 确保生成 HTML 文件
-collections:
   notes:
     output: true   # 确保生成 HTML 文件
 
