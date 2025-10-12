@@ -5,7 +5,7 @@ description: "「读书不觉已春深，一寸光阴一寸金。」"
 header-img: "img/home-bg-notes.jpg"
 ---
 
-{% assign paginator = site.academic | sort: 'date' | reverse %}
+{% assign paginator = site.notes | sort: 'date' | reverse %}
 
 {% for post in paginator %}
 <div class="post-preview">
