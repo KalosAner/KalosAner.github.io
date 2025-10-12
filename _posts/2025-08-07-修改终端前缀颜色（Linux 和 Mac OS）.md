@@ -1,12 +1,11 @@
 ---
-layout:       post
-title:        "修改终端前缀颜色（Linux 和 Mac OS）"
-author:       "KalosAner"
+layout: post
+title: 修改终端前缀颜色（Linux 和 Mac OS）
+author: Kalos Aner
 header-style: text
-catalog:      true
+catalog: true
 tags:
-    - 终端
-
+  - 终端
 ---
 
 #### Linux

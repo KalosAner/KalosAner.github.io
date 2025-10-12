@@ -1,13 +1,11 @@
 ---
-layout:       post
-title:        "ssh -T git@github.com 失败"
-author:       "KalosAner"
+layout: post
+title: ssh -T git@github.com 失败
+author: Kalos Aner
 header-style: text
-catalog:      true
+catalog: true
 tags:
-    - Git
-
-
+  - Git
 ---
 
 #### 问题：

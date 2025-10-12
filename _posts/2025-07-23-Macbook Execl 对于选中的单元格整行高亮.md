@@ -1,12 +1,11 @@
 ---
-layout:       post
-title:        "Macbook Execl 对于选中的单元格整行高亮"
-author:       "KalosAner"
+layout: post
+title: Macbook Execl 对于选中的单元格整行高亮
+author: Kalos Aner
 header-style: text
-catalog:      true
+catalog: true
 tags:
-    - 杂谈
-
+  - 杂谈
 ---
 
 注意：不方便存图片，所以全文无图，后期看情况补。另外这个应该不是最优的方法，但是没时间找其他方法，这个方法勉强能用。

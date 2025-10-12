@@ -1,13 +1,11 @@
 ---
-layout:       post
-title:        "设置 MacBook iTerm2 终端 ls 显示颜色"
-author:       "KalosAner"
+layout: post
+title: 设置 MacBook iTerm2 终端 ls 显示颜色
+author: Kalos Aner
 header-style: text
-catalog:      true
+catalog: true
 tags:
-    - 终端
-
-
+  - 终端
 ---
 git@github.com:plctlab/riscv-operating-system-mooc.git
 #### 问题：

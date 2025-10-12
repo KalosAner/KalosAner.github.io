@@ -1,12 +1,11 @@
 ---
-layout:       post
-title:        "在 ubuntu 上打包安装 deb 遇到的问题"
-author:       "KalosAner"
+layout: post
+title: 在 ubuntu 上打包安装 deb 遇到的问题
+author: Kalos Aner
 header-style: text
-catalog:      true
+catalog: true
 tags:
-    - Linux
-
+  - Linux
 ---
 环境：ubuntu aarch64
 

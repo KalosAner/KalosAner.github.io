@@ -1,13 +1,12 @@
 ---
-layout:       post
-title:        "MacOS 上 Iterm2 分屏切换"
-author:       "KalosAner"
+layout: post
+title: MacOS 上 Iterm2 分屏切换
+author: Kalos Aner
 header-style: text
-catalog:      true
+catalog: true
 tags:
-    - 终端
-    - 快捷键
-
+  - 终端
+  - 快捷键
 ---
 `command + t`：新建窗口
 `command + w`：关闭窗口

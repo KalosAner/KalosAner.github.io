@@ -1,13 +1,12 @@
 ---
-layout:       post
-title:        "在C语言中运行 dpkg 出现 install ok unpacked 的问题"
-author:       "KalosAner"
+layout: post
+title: 在C语言中运行 dpkg 出现 install ok unpacked 的问题
+author: Kalos Aner
 header-style: text
-catalog:      true
+catalog: true
 tags:
-    - 后端
-    - Linux
-
+  - 后端
+  - Linux
 ---
 #### 问题：
 在 C 语言中使用 system("dpkg -i xxx.deb") 安装软件包时软件包卡在 install ok unpacked 状态。
