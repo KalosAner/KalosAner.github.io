@@ -8,7 +8,7 @@
 
  - 本科/内蒙古科技大学-软件工程专业（2019-2023）
  - 硕士/东北大学-计算机技术专业（2023-2026）
- - 博客：[https://kalosaner.github.io/](https://kalosaner.github.io/)
+ - 博客：[https://kalosaner.github.io/](https://kalosaner.github.io/)(欢迎大家讨论和批评)
  - CSDN：[https://blog.csdn.net/MengYiKeNan?type=blog](https://blog.csdn.net/MengYiKeNan?type=blog)
  - 力扣：[https://leetcode.cn/u/kalosaner/](https://leetcode.cn/u/kalosaner/)
  - Github：[https://github.com/KalosAner](https://github.com/KalosAner)
