@@ -53,6 +53,7 @@ markdown: kramdown
 kramdown:
   tab_width: 4
   input: GFM # use Github Flavored Markdown !important
+  
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     span:
