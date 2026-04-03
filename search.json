@@ -10,7 +10,7 @@ layout: null
       "url"      : "{{ site.baseurl }}{{ post.url }}",
       "date"     : "{{ post.date }}"
     } {% unless forloop.last %},{% endunless %}
-  {% endfor %}
+  {% endfor %},
   {% for post in site.repost %}
     {
       "title"    : "{{ post.title | escape }}",
@@ -19,7 +19,7 @@ layout: null
       "url"      : "{{ site.baseurl }}{{ post.url }}",
       "date"     : "{{ post.date }}"
     } {% unless forloop.last %},{% endunless %}
-  {% endfor %}
+  {% endfor %},
   {% for post in site.academic %}
     {
       "title"    : "{{ post.title | escape }}",
@@ -28,7 +28,7 @@ layout: null
       "url"      : "{{ site.baseurl }}{{ post.url }}",
       "date"     : "{{ post.date }}"
     } {% unless forloop.last %},{% endunless %}
-  {% endfor %}
+  {% endfor %},
   {% for post in site.notes %}
     {
       "title"    : "{{ post.title | escape }}",
