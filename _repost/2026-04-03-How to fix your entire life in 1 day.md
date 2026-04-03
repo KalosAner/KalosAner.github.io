@@ -136,7 +136,7 @@ This has been documented enough in models like Maslow’s Hierarchy, Greuter’s
 
 I’ve talked about these many times, and synthesized them into my own [Human 3.0 model](https://letters.thedankoe.com/p/human-30-a-map-to-reach-the-top-1?lli=1), but here’s the 80/20 of the 9 stages of ego development as a refresher (because repetition helps reveal things you didn’t notice before, and there are new people reading these letters):
 
-[![img](C:\Users\Administrator\Documents\github.io\KalosAner.github.io\img\in-post\Reprint\https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbefe4764-cb9d-4415-a39e-4ddfe4164106_1000x672.jpeg)](https://substackcdn.com/image/fetch/$s_!PKbP!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbefe4764-cb9d-4415-a39e-4ddfe4164106_1000x672.jpeg)
+[![img](\img\in-post\Reprint\https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbefe4764-cb9d-4415-a39e-4ddfe4164106_1000x672.jpeg)](https://substackcdn.com/image/fetch/$s_!PKbP!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbefe4764-cb9d-4415-a39e-4ddfe4164106_1000x672.jpeg)
 
 1. **Impulsive** — No separation between impulse and action. Black and white thinking. *I.e. A toddler hits when angry because the feeling and the behavior are the same thing.*
 2. **Self-Protective** — The world is dangerous and you learn to look out for yourself. *I.e. A kid learns to hide report cards, lie about chores, and figure out what adults want to hear.*
@@ -188,7 +188,7 @@ Cybernetics illustrates the properties of intelligent systems.
 - Compare it to the goal.
 - And act again based on that feedback.
 
-[![img](C:\Users\Administrator\Documents\github.io\KalosAner.github.io\img\in-post\Reprint\https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6d235caf-992b-46be-b190-2507005ad52d_1150x364.jpeg)](https://substackcdn.com/image/fetch/$s_!_2Vx!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6d235caf-992b-46be-b190-2507005ad52d_1150x364.jpeg)
+[![img](\img\in-post\Reprint\https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6d235caf-992b-46be-b190-2507005ad52d_1150x364.jpeg)](https://substackcdn.com/image/fetch/$s_!_2Vx!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6d235caf-992b-46be-b190-2507005ad52d_1150x364.jpeg)
 
 *You can judge intelligence based on the system’s ability to iterate and persist with trial and error.*
 
