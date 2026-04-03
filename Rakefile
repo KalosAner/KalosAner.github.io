@@ -80,6 +80,38 @@ task :academic do
   end
 end # task :academic
 
+# Usage: rake post title="A Title" subtitle="A sub title"
+desc "Begin a new post in #{CONFIG['repost']}"
+task :repost do
+  abort("rake aborted: '#{CONFIG['repost']}' directory not found.") unless FileTest.directory?(CONFIG['repost'])
+  title = ENV["title"] || "new-post"
+  subtitle = ENV["subtitle"] || "This is a subtitle"
+  slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+  begin
+    date = (ENV['date'] ? Time.parse(ENV['date']) : Time.now).strftime('%Y-%m-%d')
+  rescue Exception => e
+    puts "Error - date format must be YYYY-MM-DD, please check you typed it correctly!"
+    exit -1
+  end
+  filename = File.join(CONFIG['repost'], "#{date}-#{slug}.#{CONFIG['post_ext']}")
+  if File.exist?(filename)
+    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
+  end
+
+  puts "Creating new post: #{filename}"
+  open(filename, 'w') do |repost|
+    repost.puts "---"
+    repost.puts "layout: repost"
+    repost.puts "title: \"#{title.gsub(/-/,' ')}\""
+    repost.puts "subtitle: \"#{subtitle.gsub(/-/,' ')}\""
+    repost.puts "date: #{date}"
+    repost.puts "author: \"Kalos Aner\""
+    repost.puts "header-img: \"img/post-bg-2015.jpg\""
+    repost.puts "tags: []"
+    repost.puts "---"
+  end
+end # task :repost
+
 # Usage: rake notes title="A Title" subtitle="A sub title"
 desc "Begin a new post in #{CONFIG['notes']}"
 task :notes do
