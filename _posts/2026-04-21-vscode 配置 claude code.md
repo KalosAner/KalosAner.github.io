@@ -63,7 +63,7 @@ CCR 就是做这件事的：`Claude Code → CCR(协议转换) → 目标模型 
 
 - VS Code 中安装的插件是官方 `anthropic.claude-code`，不是 CCR 的插件
 
-![img](..\img\in-post\M3wKpTGCbkNkkFWzHwiY.png)
+![img](\img\in-post\M3wKpTGCbkNkkFWzHwiY.png)
 
 - CCR 没有独立的 VS Code 插件，它通过修改 `ANTHROPIC_BASE_URL` 让请求经过 CCR
 
@@ -389,17 +389,17 @@ alias ccr-switch='~/.claude-code-router/ccr-switch.sh'
 
 IDEA中也有 claude code 相关的插件，直接搜Claude Code，如下图。
 
-![img](..\img\in-post\e8vgx2IHcBxZkcX7pHpl.png)
+![img](\img\in-post\e8vgx2IHcBxZkcX7pHpl.png)
 
 图中两个插件都可以使用，这里演示以CC GUI为例。
 
 使用起来非常简单，打开插件之后直接输入对话，它会提示你需要安装或者配置什么。也可以参考下面的案例。使用之前需要先安装SDK，如下图
 
-![img](..\img\in-post\a4597Q27CMyVC1x9rUgn.png)
+![img](\img\in-post\a4597Q27CMyVC1x9rUgn.png)
 
 然后授权本地配置，如下图。
 
-![img](..\img\in-post\EgNsD4DCDDHXBpVYhZdh.png)
+![img](\img\in-post\EgNsD4DCDDHXBpVYhZdh.png)
 
 然后就可以直接进行对话了。
 
