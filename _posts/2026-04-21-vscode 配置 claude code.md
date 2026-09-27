@@ -1,13 +1,16 @@
 ---
 layout: post
-title: "实习感悟与自我成长"
+title: "vscode 配置 claude code"
 author: "Kalos Aner"
 header-style: text
 catalog: true
 tags:
   - 杂谈
+  - vibe coding
 
 ---
+
+
 
 ## 0. 前言
 
