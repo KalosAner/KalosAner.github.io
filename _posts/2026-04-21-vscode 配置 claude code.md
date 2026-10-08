@@ -94,8 +94,6 @@ CCR 就是做这件事的：`Claude Code → CCR(协议转换) → 目标模型 
 
 CCR 配置文件: `~/.claude-code-router/config.json`。
 
-**展开此代码块查看详情。**
-
 ```json
 {
   "LOG": false,
