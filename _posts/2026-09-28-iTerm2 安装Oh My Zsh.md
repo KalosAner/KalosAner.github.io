@@ -113,3 +113,20 @@ plugins=(
 #### 5、效果展示
 
 ![image-20261006下午45433433](/img/in-post/image-20261006下午45433433.png)
+
+#### 6、其他
+
+安装Oh My Zsh之后对于一些常用的git命令例如 `git branch` 都会默认进入分页器，但是我不习惯查看分支也进入分页器。对于这种情况可以使用下面的命令来禁用branch的分页器：
+
+```bash
+git config --global pager.branch false
+```
+
+除了branch之外还有很多命令都会进入分页器，如果想禁用就针对性的搜索就行。不过一般情况下把上面命令中的branch替换成想要禁用的git功能的名字就行。
+
+另外，如果想禁用git的所有分页器可以使用下面的命令，但是不推荐全部禁用。
+
+```bash
+git config --global core.pager cat
+```
+
