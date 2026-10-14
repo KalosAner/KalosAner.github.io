@@ -7,3 +7,33 @@
 @gray-light: lighten(black, 75%);
 
 @white-faded: fade(white, 80%);
+
+// -- Doubao-inspired reading tokens
+// Values measured from Doubao's production CSS (see memory: doubao-design-tokens).
+// Scoped to article body copy only; the rest of the theme keeps the Hux palette.
+
+@reading-width: 820px;              // Doubao uses min(832px, 100% - 48px)
+@reading-text: #000000f2;           // --dbx-text-markdown
+@reading-text-secondary: #00000080; // --dbx-text-secondary
+@reading-text-tertiary: #00000059;  // --dbx-text-tertiary
+@reading-text-muted: #666;          // --dbx-text-60
+
+@reading-brand: #06f;               // --dbx-brand-default / --dbx-text-highlight
+@reading-brand-hover: #4d8eff;      // --dbx-text-highlight-hover
+
+@reading-surface: #f9fafb;          // --s-color-bg-secondary
+@reading-surface-alt: #f3f4f6;      // --s-color-bg-tertiary
+@reading-surface-deep: #ebecef;     // --s-color-bg-quaternary
+
+@reading-line: #00000012;           // --dbx-line-7
+@reading-line-strong: #0000001a;    // --dbx-line-10
+
+// Radius ramp, expressed in px rather than Doubao's rem values.
+// Bootstrap sets `html { font-size: 10px }`, so 1rem is 10px here and not the
+// 16px Doubao assumes — writing these as rem would render everything at 62.5%
+// of the intended size.
+@reading-radius-xs: 4px;   // Doubao .25rem
+@reading-radius-sm: 6px;   // Doubao .375rem
+@reading-radius-md: 8px;   // Doubao .5rem
+@reading-radius-lg: 10px;  // Doubao .625rem
+@reading-radius-xl: 12px;  // Doubao .75rem

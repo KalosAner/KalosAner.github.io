@@ -274,3 +274,133 @@ pre.highlight {
     }
   }
 }
+
+// -- Doubao-style code block chrome
+//
+// The header bar (language label + copy button) is injected by js/hux-blog.js.
+// Without it the block renders exactly as before, so this only ever adds
+// decoration and degrades cleanly when JS is unavailable.
+//
+// Every selector here uses `div.highlighter-rouge`: Rouge puts that same class
+// on inline `<code>` elements too, and without the element qualifier the frame
+// and header would be applied to inline code as well.
+
+article .post-container div.highlighter-rouge {
+  position: relative;
+  margin: 22px 0;
+  border-radius: @reading-radius-xl;
+  // clips the header bar to the rounded corners
+  overflow: hidden;
+}
+
+// Scroll the code itself rather than the whole block, so the header stays put.
+article .post-container div.highlighter-rouge .highlight {
+  margin-bottom: 0;
+  border-radius: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  // js/hux-blog.js wraps every table in .table-responsive. Inside a code block
+  // that would nest a second horizontal scroller, so let this element be the
+  // only one and keep the inner wrapper inert.
+  .table-responsive {
+    overflow: visible;
+    margin: 0;
+    border: 0;
+  }
+  // Let the table outgrow the column so wide code scrolls rather than being
+  // squeezed into the column width.
+  .table {
+    width: auto;
+    min-width: 100%;
+  }
+  &::-webkit-scrollbar {
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: fade(white, 18%);
+    border-radius: 5px;
+    &:hover {
+      background: fade(white, 30%);
+    }
+  }
+  scrollbar-width: thin;
+  scrollbar-color: fade(white, 18%) transparent;
+}
+
+// The theme pulls code blocks flush to the screen edge on small phones, which
+// would be clipped by the rounded, overflow-hidden frame above.
+@media (max-width: 480px) {
+  article .post-container div.highlighter-rouge .highlight {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px 6px 16px;
+  background: #21252b;
+  border-bottom: 1px solid #181a1f;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #7f848e;
+  // the header is chrome, not content
+  user-select: none;
+}
+
+.code-block-lang {
+  .monospace;
+  letter-spacing: 0.3px;
+}
+
+.code-copy-btn {
+  .monospace;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #abb2bf;
+  background: transparent;
+  border: 1px solid #3e4451;
+  border-radius: @reading-radius-sm;
+  cursor: pointer;
+  // Hidden until the block is hovered or the button is focused, so the code
+  // stays uncluttered while reading.
+  opacity: 0;
+  transition: opacity 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease, color 0.15s ease;
+  &:hover {
+    color: #fff;
+    background: #3e4451;
+    border-color: #4b5263;
+  }
+  &:focus-visible {
+    opacity: 1;
+    outline: 2px solid @reading-brand;
+    outline-offset: 1px;
+  }
+  &.copied {
+    color: #98c379;
+    border-color: fade(#98c379, 45%);
+    background: fade(#98c379, 12%);
+  }
+}
+
+// Touch devices never hover, so the button has to be visible by default there.
+div.highlighter-rouge:hover .code-copy-btn,
+div.highlighter-rouge:focus-within .code-copy-btn {
+  opacity: 1;
+}
+@media (hover: none) {
+  .code-copy-btn {
+    opacity: 1;
+  }
+}
+

@@ -33,6 +33,87 @@ $(document).ready(function() {
     $("table").addClass("table");
 });
 
+// Code block chrome: a language label and a copy button, added to every
+// rouge-highlighted block in a post. Markup is generated here rather than in
+// the layouts so that posts render identically without JS.
+$(document).ready(function() {
+
+    // Rouge emits `<div class="language-<lang> highlighter-rouge">`, and uses
+    // `plaintext` when a fence has no language. Doubao shows nothing in that
+    // case, so neither do we.
+    function languageOf($block) {
+        var match = /(^|\s)language-([^\s]+)/.exec($block.attr("class") || "");
+        if (!match) return "";
+        var lang = match[2];
+        if (lang === "plaintext" || lang === "text" || lang === "highlight") return "";
+        return lang;
+    }
+
+    function plainTextOf($block) {
+        var $code = $block.find("td.rouge-code pre");
+        if (!$code.length) $code = $block.find("pre").last();
+        // Line numbers live in a sibling cell, so they are not picked up here.
+        return $code.length ? $code.text() : "";
+    }
+
+    function flash($btn, label) {
+        var original = $btn.data("label") || "Copy";
+        $btn.addClass("copied").text(label);
+        clearTimeout($btn.data("timer"));
+        $btn.data("timer", setTimeout(function() {
+            $btn.removeClass("copied").text(original);
+        }, 1600));
+    }
+
+    // navigator.clipboard is unavailable over plain http, so keep a fallback.
+    function copy(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text);
+        }
+        return new Promise(function(resolve, reject) {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.top = "-1000px";
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = false;
+            try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+            document.body.removeChild(ta);
+            ok ? resolve() : reject(new Error("copy failed"));
+        });
+    }
+
+    // Rouge puts `highlighter-rouge` on inline <code> as well as on the block
+    // wrapper, so select the `div` specifically.
+    $("article .post-container div.highlighter-rouge").each(function() {
+        var $block = $(this);
+        // Idempotent: the catalog script and others also touch post markup.
+        if ($block.children(".code-block-header").length) return;
+
+        var lang = languageOf($block);
+        var $header = $("<div class='code-block-header'></div>");
+        var $label = $("<span class='code-block-lang'></span>").text(lang);
+        var $btn = $("<button type='button' class='code-copy-btn'>Copy</button>");
+
+        $btn.data("label", "Copy");
+        $btn.on("click", function() {
+            var text = plainTextOf($block);
+            copy(text).then(function() {
+                flash($btn, "Copied");
+            }).catch(function() {
+                flash($btn, "Failed");
+            });
+        });
+
+        $header.append($label).append($btn);
+        // The header sits outside `.highlight`, which owns the scrollbar, so it
+        // stays fixed while wide code scrolls underneath.
+        $block.prepend($header);
+    });
+});
+
 // responsive embed videos
 $(document).ready(function() {
     $('iframe[src*="youtube.com"]').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');

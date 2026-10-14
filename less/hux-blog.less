@@ -135,6 +135,8 @@ pre code {
   width: auto;
   white-space: pre; // save it but no-wrap;
   word-wrap: normal; // no-wrap
+  tab-size: 4;
+  -moz-tab-size: 4;
 }
 code,
 kbd,
@@ -272,6 +274,204 @@ samp {
     // I can not understand this but this made anchor always in the same line as title
     position: absolute;
     text-decoration: none !important;
+  }
+}
+
+// -- Doubao-inspired reading styles for article pages
+//
+// Scoped to `article .post-container` on purpose: only post.html and keynote.html
+// wrap their content in <article>, while about.html uses a bare `.post-container`
+// and must keep the original Hux styling.
+//
+// Values come from Doubao's production CSS (see memory: doubao-design-tokens).
+// Two deliberate deviations, because this is long-form Chinese technical writing
+// rather than a short chat answer:
+//   1. the heading ramp is scaled up from Doubao's 26/20/16/16 so that h3/h4 —
+//      the levels these posts actually use most — stay scannable;
+//   2. line-height stays at the theme's 1.7 instead of Doubao's 1.5, which is
+//      cramped for long CJK paragraphs.
+article .post-container {
+  color: @reading-text;
+  font-size: 16px;
+  line-height: 1.7;
+
+  // Doubao separates blocks with spacing rather than rules, and keeps
+  // paragraphs tight. The theme's 30px is noticeably looser.
+  p {
+    margin: 18px 0;
+  }
+
+  a {
+    color: @reading-brand;
+    text-decoration: none;
+    border-bottom: 1px solid fade(@reading-brand, 30%);
+    &:hover,
+    &:focus {
+      color: @reading-brand-hover;
+      border-bottom-color: fade(@reading-brand-hover, 50%);
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    // Doubao leans on spacing and weight for hierarchy, not dividers.
+    margin: 1.6em 0 0.6em;
+    line-height: 1.4;
+    color: @reading-text;
+    &:first-child {
+      margin-top: 0;
+    }
+    & + p {
+      margin-top: 0.6em;
+    }
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+  }
+  h2 {
+    // Doubao's h2 is the one bold level in the ramp.
+    font-size: 23px;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  h5,
+  h6 {
+    font-size: 16px;
+    font-weight: 600;
+    color: @reading-text-muted;
+  }
+
+  // The theme draws a hairline above every h2; Doubao has no such rule.
+  h2::before {
+    content: none;
+    display: none;
+  }
+
+  ul,
+  ol {
+    margin: 18px 0;
+    padding-left: 26px;
+  }
+  li {
+    margin-bottom: 6px;
+    p {
+      margin: 0 0 6px;
+    }
+  }
+  li::marker {
+    color: @reading-text-tertiary;
+  }
+
+  blockquote {
+    margin: 20px 0;
+    padding: 12px 18px;
+    border-left: 3px solid @reading-line-strong;
+    border-radius: 0 @reading-radius-md @reading-radius-md 0;
+    background: @reading-surface;
+    color: @reading-text-secondary;
+    // Italics are poor typography for CJK text, and Doubao does not use them.
+    font-style: normal;
+    font-size: 1em;
+    p {
+      margin: 0;
+      & + p {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  // Inline code: the theme inherits Bootstrap's pink (#c7254e on #f9f2f4),
+  // which clashes with the surrounding neutral palette.
+  //
+  // `:not(pre) >` is load-bearing: Rouge renders fenced blocks as
+  // `<pre class="highlight"><code>`, and without the guard this rule's higher
+  // specificity would paint a light box inside every dark code block.
+  :not(pre) > code {
+    padding: 0.15em 0.4em;
+    font-size: 0.9em;
+    color: @reading-text;
+    background: @reading-surface-alt;
+    border: 1px solid @reading-line;
+    border-radius: @reading-radius-xs;
+  }
+
+  table {
+    width: 100%;
+    margin: 22px 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid @reading-line-strong;
+    border-radius: @reading-radius-md;
+    overflow: hidden;
+    font-size: 15px;
+    th,
+    td {
+      padding: 9px 14px;
+      border: 0;
+      border-bottom: 1px solid @reading-line;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: @reading-surface;
+      font-weight: 600;
+      color: @reading-text;
+    }
+    // The theme forces `border: 1px solid #eee !important` onto cells via
+    // `table.table > tbody/thead`, which would otherwise win over everything
+    // above and paint a grey box over the rounded frame. These rules carry
+    // `!important` too, and their higher specificity then settles the cascade.
+    &.table > tbody > tr > th,
+    &.table > tbody > tr > td,
+    &.table > thead > tr > th {
+      border: 0 !important;
+      border-bottom: 1px solid @reading-line !important;
+    }
+    &.table > tbody > tr:last-child > td {
+      border-bottom: 0 !important;
+    }
+  }
+
+  img {
+    border-radius: @reading-radius-md;
+  }
+
+  hr {
+    margin: 30px 0;
+    border: 0;
+    border-top: 1px solid @reading-line;
+  }
+
+  // Wide tables scroll instead of stretching the column.
+  .table-responsive {
+    border: 0;
+    margin-bottom: 22px;
+  }
+}
+
+// Doubao sets its answer column to min(832px, 100% - 48px). At the 1170px
+// Bootstrap container, post.html's col-lg-9 minus its 15px gutters gives 847px,
+// so capping at 850px yields the 820px of text this was aimed at. The 5% right
+// padding the theme applies to `.post-container` has to go, or it would eat
+// into that again. Only the article layout is retargeted.
+article .post-container {
+  @media (min-width: 768px) {
+    padding-right: 15px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 850px;
   }
 }
 
