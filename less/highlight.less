@@ -358,7 +358,14 @@ article .post-container div.highlighter-rouge .highlight {
   letter-spacing: 0.3px;
 }
 
-.code-copy-btn {
+.code-block-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.code-copy-btn,
+.code-wrap-btn {
   .monospace;
   display: inline-flex;
   align-items: center;
@@ -371,7 +378,7 @@ article .post-container div.highlighter-rouge .highlight {
   border: 1px solid #3e4451;
   border-radius: @reading-radius-sm;
   cursor: pointer;
-  // Hidden until the block is hovered or the button is focused, so the code
+  // Hidden until the block is hovered or a button is focused, so the code
   // stays uncluttered while reading.
   opacity: 0;
   transition: opacity 0.15s ease, background-color 0.15s ease,
@@ -386,21 +393,59 @@ article .post-container div.highlighter-rouge .highlight {
     outline: 2px solid @reading-brand;
     outline-offset: 1px;
   }
-  &.copied {
-    color: #98c379;
-    border-color: fade(#98c379, 45%);
-    background: fade(#98c379, 12%);
-  }
 }
 
-// Touch devices never hover, so the button has to be visible by default there.
+.code-copy-btn.copied {
+  color: #98c379;
+  border-color: fade(#98c379, 45%);
+  background: fade(#98c379, 12%);
+}
+
+// Wrapping is off by default, so the toggle reads as a state indicator rather
+// than a call to action: the accent border and text only appear when it is on.
+//
+// `div` and the state class are both needed to outrank `.code-wrap-btn:hover`
+// above, which would otherwise repaint an active button on hover.
+div.highlighter-rouge .code-wrap-btn.active,
+div.highlighter-rouge .code-wrap-btn.active:hover {
+  color: #61afef;
+  border-color: fade(#61afef, 45%);
+  background: fade(#61afef, 12%);
+}
+
+// Touch devices never hover, so the buttons have to be visible by default there.
 div.highlighter-rouge:hover .code-copy-btn,
-div.highlighter-rouge:focus-within .code-copy-btn {
+div.highlighter-rouge:hover .code-wrap-btn,
+div.highlighter-rouge:focus-within .code-copy-btn,
+div.highlighter-rouge:focus-within .code-wrap-btn {
   opacity: 1;
 }
 @media (hover: none) {
-  .code-copy-btn {
+  .code-copy-btn,
+  .code-wrap-btn {
     opacity: 1;
+  }
+}
+
+// -- Optional line wrapping, toggled per code block by js/hux-blog.js
+//
+// The theme sets `white-space: pre` on `pre code` and `overflow-x: auto` on the
+// scrolling `.highlight`, so long lines scroll. Turning both off lets the code
+// reflow to the column width instead.
+//
+// The `article .post-container` prefix is load-bearing: it has to match the
+// specificity of the default scroll rules above, or `overflow-x: auto` wins and
+// wrapping leaves a stray horizontal scrollbar behind.
+article .post-container div.highlighter-rouge.code-wrap {
+  .highlight {
+    overflow-x: hidden;
+  }
+  .highlight pre,
+  pre,
+  pre code {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 }
 

@@ -626,7 +626,13 @@ article .post-container div.highlighter-rouge .highlight::-webkit-scrollbar-thum
   font-family: "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
   letter-spacing: 0.3px;
 }
-.code-copy-btn {
+.code-block-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.code-copy-btn,
+.code-wrap-btn {
   font-family: "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
   display: inline-flex;
   align-items: center;
@@ -642,12 +648,14 @@ article .post-container div.highlighter-rouge .highlight::-webkit-scrollbar-thum
   opacity: 0;
   transition: opacity 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
-.code-copy-btn:hover {
+.code-copy-btn:hover,
+.code-wrap-btn:hover {
   color: #fff;
   background: #3e4451;
   border-color: #4b5263;
 }
-.code-copy-btn:focus-visible {
+.code-copy-btn:focus-visible,
+.code-wrap-btn:focus-visible {
   opacity: 1;
   outline: 2px solid #06f;
   outline-offset: 1px;
@@ -657,14 +665,33 @@ article .post-container div.highlighter-rouge .highlight::-webkit-scrollbar-thum
   border-color: rgba(152, 195, 121, 0.45);
   background: rgba(152, 195, 121, 0.12);
 }
+div.highlighter-rouge .code-wrap-btn.active,
+div.highlighter-rouge .code-wrap-btn.active:hover {
+  color: #61afef;
+  border-color: rgba(97, 175, 239, 0.45);
+  background: rgba(97, 175, 239, 0.12);
+}
 div.highlighter-rouge:hover .code-copy-btn,
-div.highlighter-rouge:focus-within .code-copy-btn {
+div.highlighter-rouge:hover .code-wrap-btn,
+div.highlighter-rouge:focus-within .code-copy-btn,
+div.highlighter-rouge:focus-within .code-wrap-btn {
   opacity: 1;
 }
 @media (hover: none) {
-  .code-copy-btn {
+  .code-copy-btn,
+  .code-wrap-btn {
     opacity: 1;
   }
+}
+article .post-container div.highlighter-rouge.code-wrap .highlight {
+  overflow-x: hidden;
+}
+article .post-container div.highlighter-rouge.code-wrap .highlight pre,
+article .post-container div.highlighter-rouge.code-wrap pre,
+article .post-container div.highlighter-rouge.code-wrap pre code {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .search-page {
   position: fixed;

@@ -33,9 +33,9 @@ $(document).ready(function() {
     $("table").addClass("table");
 });
 
-// Code block chrome: a language label and a copy button, added to every
-// rouge-highlighted block in a post. Markup is generated here rather than in
-// the layouts so that posts render identically without JS.
+// Code block chrome: a language label, a line-wrap toggle and a copy button,
+// added to every rouge-highlighted block in a post. Markup is generated here
+// rather than in the layouts so that posts render identically without JS.
 $(document).ready(function() {
 
     // Rouge emits `<div class="language-<lang> highlighter-rouge">`, and uses
@@ -95,7 +95,20 @@ $(document).ready(function() {
         var lang = languageOf($block);
         var $header = $("<div class='code-block-header'></div>");
         var $label = $("<span class='code-block-lang'></span>").text(lang);
+        var $actions = $("<span class='code-block-actions'></span>");
+        // Wrapping is off by default, matching how code blocks normally read:
+        // wide lines scroll instead of reflowing.
+        var $wrapBtn = $("<button type='button' class='code-wrap-btn'>Wrap</button>");
         var $btn = $("<button type='button' class='code-copy-btn'>Copy</button>");
+
+        $wrapBtn.attr({
+            title: "Toggle line wrapping",
+            "aria-pressed": "false"
+        });
+        $wrapBtn.on("click", function() {
+            var on = $block.toggleClass("code-wrap").hasClass("code-wrap");
+            $wrapBtn.toggleClass("active", on).attr("aria-pressed", on ? "true" : "false");
+        });
 
         $btn.data("label", "Copy");
         $btn.on("click", function() {
@@ -107,7 +120,8 @@ $(document).ready(function() {
             });
         });
 
-        $header.append($label).append($btn);
+        $actions.append($wrapBtn).append($btn);
+        $header.append($label).append($actions);
         // The header sits outside `.highlight`, which owns the scrollbar, so it
         // stays fixed while wide code scrolls underneath.
         $block.prepend($header);
