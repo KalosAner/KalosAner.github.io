@@ -629,10 +629,56 @@ article .post-container div.highlighter-rouge .highlight::-webkit-scrollbar-thum
 .code-block-actions {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
 }
-.code-copy-btn,
+.code-switch-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.code-switch-text {
+  font-family: "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #7f848e;
+  transition: color 0.15s ease;
+}
 .code-wrap-btn {
+  position: relative;
+  flex: none;
+  width: 28px;
+  height: 16px;
+  padding: 0;
+  background: #3e4451;
+  border: 1px solid #4b5263;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+.code-switch-knob {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 12px;
+  height: 12px;
+  background: #abb2bf;
+  border-radius: 50%;
+  transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.18s ease;
+}
+.code-wrap-btn.active {
+  background: rgba(97, 175, 239, 0.22);
+  border-color: rgba(97, 175, 239, 0.55);
+}
+.code-wrap-btn.active .code-switch-knob {
+  transform: translateX(12px);
+  background: #61afef;
+}
+.code-switch-wrap:has(.code-wrap-btn.active) .code-switch-text {
+  color: #61afef;
+}
+.code-copy-btn {
   font-family: "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
   display: inline-flex;
   align-items: center;
@@ -648,14 +694,12 @@ article .post-container div.highlighter-rouge .highlight::-webkit-scrollbar-thum
   opacity: 0;
   transition: opacity 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
-.code-copy-btn:hover,
-.code-wrap-btn:hover {
+.code-copy-btn:hover {
   color: #fff;
   background: #3e4451;
   border-color: #4b5263;
 }
-.code-copy-btn:focus-visible,
-.code-wrap-btn:focus-visible {
+.code-copy-btn:focus-visible {
   opacity: 1;
   outline: 2px solid #06f;
   outline-offset: 1px;
@@ -665,33 +709,62 @@ article .post-container div.highlighter-rouge .highlight::-webkit-scrollbar-thum
   border-color: rgba(152, 195, 121, 0.45);
   background: rgba(152, 195, 121, 0.12);
 }
-div.highlighter-rouge .code-wrap-btn.active,
-div.highlighter-rouge .code-wrap-btn.active:hover {
-  color: #61afef;
-  border-color: rgba(97, 175, 239, 0.45);
-  background: rgba(97, 175, 239, 0.12);
+.code-wrap-btn:focus-visible {
+  outline: 2px solid #06f;
+  outline-offset: 2px;
+}
+.code-copy-btn.copied {
+  color: #98c379;
+  border-color: rgba(152, 195, 121, 0.45);
+  background: rgba(152, 195, 121, 0.12);
 }
 div.highlighter-rouge:hover .code-copy-btn,
-div.highlighter-rouge:hover .code-wrap-btn,
+div.highlighter-rouge:hover .code-switch-wrap,
 div.highlighter-rouge:focus-within .code-copy-btn,
-div.highlighter-rouge:focus-within .code-wrap-btn {
+div.highlighter-rouge:focus-within .code-switch-wrap {
   opacity: 1;
 }
 @media (hover: none) {
   .code-copy-btn,
-  .code-wrap-btn {
+  .code-switch-wrap {
     opacity: 1;
   }
+}
+article .post-container div.highlighter-rouge .code-lines {
+  display: block;
+  counter-reset: code-line;
+}
+article .post-container div.highlighter-rouge .code-line {
+  display: block;
+  position: relative;
+  counter-increment: code-line;
+  padding-left: 3.4em;
+  min-width: max-content;
+}
+article .post-container div.highlighter-rouge .code-line::before {
+  content: counter(code-line);
+  position: absolute;
+  left: 0;
+  width: 2.6em;
+  padding-right: 0.8em;
+  text-align: right;
+  color: #636d83;
+  user-select: none;
+  -webkit-user-select: none;
 }
 article .post-container div.highlighter-rouge.code-wrap .highlight {
   overflow-x: hidden;
 }
 article .post-container div.highlighter-rouge.code-wrap .highlight pre,
 article .post-container div.highlighter-rouge.code-wrap pre,
-article .post-container div.highlighter-rouge.code-wrap pre code {
+article .post-container div.highlighter-rouge.code-wrap pre code,
+article .post-container div.highlighter-rouge.code-wrap .code-line {
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: anywhere;
+}
+article .post-container div.highlighter-rouge.code-wrap .code-line {
+  min-width: 0;
 }
 .search-page {
   position: fixed;

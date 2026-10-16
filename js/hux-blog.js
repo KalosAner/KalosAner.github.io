@@ -50,10 +50,112 @@ $(document).ready(function() {
     }
 
     function plainTextOf($block) {
-        var $code = $block.find("td.rouge-code pre");
-        if (!$code.length) $code = $block.find("pre").last();
-        // Line numbers live in a sibling cell, so they are not picked up here.
-        return $code.length ? $code.text() : "";
+        // Lines are separate block elements, so `.text()` would concatenate them
+        // with nothing between — join them explicitly instead.
+        //
+        // js/hux-blog.js rewrites every code block into `.code-line` spans, so
+        // that is the normal path; the `<pre>` fallback covers a block the
+        // rewrite skipped.
+        var $lines = $block.find(".code-line");
+        var text;
+        if ($lines.length) {
+            var parts = [];
+            $lines.each(function() { parts.push($(this).text()); });
+            text = parts.join("\n");
+        } else {
+            var $code = $block.find("td.rouge-code pre");
+            if (!$code.length) $code = $block.find("pre").last();
+            text = $code.length ? $code.text() : "";
+        }
+        // Rouge terminates the source with a newline; that newline ends the last
+        // line rather than starting another, so copying it would paste a blank
+        // line. Line numbers are absolutely positioned in ::before and so are
+        // never part of this text.
+        return text.replace(/\n+$/, "");
+    }
+
+    // Rouge renders line numbers in a separate `<td>` of its own, so a number is
+    // bound to a row only by sharing an index. That breaks as soon as one line
+    // wraps: the code cell grows while the gutter cell does not, and every
+    // number below the wrap drifts out of step.
+    //
+    // Instead, move the numbering into the code itself as CSS counters
+    // (`counter-increment` on each line, `content: counter(...)` in ::before).
+    // A number then lives inside the line it belongs to, so a wrapped line
+    // grows its own row and stays aligned with its number.
+    //
+    // Highlight spans routinely straddle line breaks (`<span>"$(</span>...`),
+    // so the text cannot simply be split on "\n" without shredding the markup.
+    // Walk the text nodes and break only those, re-wrapping each fragment in a
+    // copy of its ancestors so every line keeps its own highlighting.
+    function splitLines($pre) {
+        // The source `<pre>` holds the highlighted code. Work on a detached copy
+        // so the DOM is never left half-converted if something throws.
+        var source = $pre[0];
+        var $out = $("<code class='code-lines'></code>");
+        var line = null;
+
+        function startLine() {
+            line = document.createElement("span");
+            line.className = "code-line";
+        }
+
+        // Clone `node`'s ancestor chain down to it, so a fragment split out of a
+        // highlighted run keeps the class that colours it.
+        function emit(text, chain) {
+            if (!line) startLine();
+            var target = line;
+            for (var i = 0; i < chain.length; i++) {
+                var wrapper = chain[i].cloneNode(false);
+                target.appendChild(wrapper);
+                target = wrapper;
+            }
+            target.appendChild(document.createTextNode(text));
+        }
+
+        function walk(node, chain) {
+            if (node.nodeType === 3) {
+                // Every newline ends the line it terminates. A blank line in the
+                // source is two newlines in a row: the first ends the text line,
+                // the second ends the (now empty) line that follows — which is
+                // the blank line. So each "\n" closes exactly one line.
+                //
+                // Blank lines matter here because each one still gets a number,
+                // and that is what keeps the gutter in step with the source.
+                var value = node.nodeValue;
+                var start = 0;
+                for (var i = 0; i < value.length; i++) {
+                    if (value.charAt(i) !== "\n") continue;
+                    if (i > start) emit(value.slice(start, i), chain);
+                    $out.append(line);
+                    startLine();
+                    start = i + 1;
+                }
+                // Text after the last newline stays on the current line; the
+                // final newline of the block therefore leaves an empty trailing
+                // line, which is dropped by the caller.
+                if (start < value.length) emit(value.slice(start), chain);
+                return;
+            }
+            if (node.nodeType !== 1) return;
+            // An element spanning a newline has to be split across both lines,
+            // so recurse with it appended to the chain rather than the line.
+            var next = chain.concat([node]);
+            for (var c = 0; c < node.childNodes.length; c++) {
+                walk(node.childNodes[c], next);
+            }
+        }
+
+        startLine();
+        for (var i = 0; i < source.childNodes.length; i++) {
+            walk(source.childNodes[i], []);
+        }
+        $out.append(line);
+
+        // A trailing newline leaves an empty final line; drop it.
+        var $last = $out.children(".code-line").last();
+        if ($last.length && !$last.text().length) $last.remove();
+        return $out;
     }
 
     function flash($btn, label) {
@@ -92,24 +194,39 @@ $(document).ready(function() {
         // Idempotent: the catalog script and others also touch post markup.
         if ($block.children(".code-block-header").length) return;
 
+        // Rebuild the code as per-line elements so CSS counters can number it.
+        // The gutter cell is dropped: it is the reason numbers drifted out of
+        // step once a line wrapped, and the counters replace it outright.
+        var $codePre = $block.find("td.rouge-code pre");
+        if ($codePre.length) {
+            var $lines = splitLines($codePre);
+            $codePre.empty().append($lines);
+            $block.find("td.rouge-gutter").remove();
+            // With the gutter gone the wrapper cell no longer needs to be a
+            // table, but leaving the markup alone keeps the table's own styling
+            // (padding, font, background) applying exactly as before.
+        }
+
         var lang = languageOf($block);
         var $header = $("<div class='code-block-header'></div>");
         var $label = $("<span class='code-block-lang'></span>").text(lang);
         var $actions = $("<span class='code-block-actions'></span>");
         // Wrapping is off by default, matching how code blocks normally read:
         // wide lines scroll instead of reflowing.
-        var $wrapBtn = $("<button type='button' class='code-wrap-btn'>Wrap</button>");
-        var $btn = $("<button type='button' class='code-copy-btn'>Copy</button>");
+        var $wrapWrap = $("<span class='code-switch-wrap'></span>");
+        var $wrapBtn = $("<button type='button' class='code-wrap-btn' role='switch' aria-checked='false'></button>");
+        var $wrapText = $("<span class='code-switch-text'>Wrap</span>");
 
-        $wrapBtn.attr({
-            title: "Toggle line wrapping",
-            "aria-pressed": "false"
-        });
+        $wrapBtn.attr("title", "Toggle line wrapping");
+        // The knob is drawn by CSS; the button carries only the track.
+        $wrapBtn.append("<span class='code-switch-knob'></span>");
         $wrapBtn.on("click", function() {
             var on = $block.toggleClass("code-wrap").hasClass("code-wrap");
-            $wrapBtn.toggleClass("active", on).attr("aria-pressed", on ? "true" : "false");
+            $wrapBtn.toggleClass("active", on).attr("aria-checked", on ? "true" : "false");
         });
+        $wrapWrap.append($wrapText).append($wrapBtn);
 
+        var $btn = $("<button type='button' class='code-copy-btn'>Copy</button>");
         $btn.data("label", "Copy");
         $btn.on("click", function() {
             var text = plainTextOf($block);
@@ -120,7 +237,7 @@ $(document).ready(function() {
             });
         });
 
-        $actions.append($wrapBtn).append($btn);
+        $actions.append($wrapWrap).append($btn);
         $header.append($label).append($actions);
         // The header sits outside `.highlight`, which owns the scrollbar, so it
         // stays fixed while wide code scrolls underneath.

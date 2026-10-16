@@ -361,11 +361,71 @@ article .post-container div.highlighter-rouge .highlight {
 .code-block-actions {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
 }
 
-.code-copy-btn,
+// -- Line-wrapping switch
+//
+// A track with a sliding knob rather than a labelled button, so the state is
+// readable at a glance. The knob is a child element drawn by CSS; the button
+// itself is the track.
+.code-switch-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.code-switch-text {
+  .monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #7f848e;
+  transition: color 0.15s ease;
+}
+
 .code-wrap-btn {
+  position: relative;
+  flex: none;
+  width: 28px;
+  height: 16px;
+  padding: 0;
+  background: #3e4451;
+  border: 1px solid #4b5263;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.code-switch-knob {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 12px;
+  height: 12px;
+  background: #abb2bf;
+  border-radius: 50%;
+  transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1),
+    background-color 0.18s ease;
+}
+
+.code-wrap-btn.active {
+  background: fade(#61afef, 22%);
+  border-color: fade(#61afef, 55%);
+}
+
+// 28px track - 2px borders - 12px knob - 2px insets = 12px of travel.
+.code-wrap-btn.active .code-switch-knob {
+  transform: translateX(12px);
+  background: #61afef;
+}
+
+.code-switch-wrap:has(.code-wrap-btn.active) .code-switch-text {
+  color: #61afef;
+}
+
+.code-copy-btn {
   .monospace;
   display: inline-flex;
   align-items: center;
@@ -393,6 +453,16 @@ article .post-container div.highlighter-rouge .highlight {
     outline: 2px solid @reading-brand;
     outline-offset: 1px;
   }
+  &.copied {
+    color: #98c379;
+    border-color: fade(#98c379, 45%);
+    background: fade(#98c379, 12%);
+  }
+}
+
+.code-wrap-btn:focus-visible {
+  outline: 2px solid @reading-brand;
+  outline-offset: 2px;
 }
 
 .code-copy-btn.copied {
@@ -401,30 +471,59 @@ article .post-container div.highlighter-rouge .highlight {
   background: fade(#98c379, 12%);
 }
 
-// Wrapping is off by default, so the toggle reads as a state indicator rather
-// than a call to action: the accent border and text only appear when it is on.
-//
-// `div` and the state class are both needed to outrank `.code-wrap-btn:hover`
-// above, which would otherwise repaint an active button on hover.
-div.highlighter-rouge .code-wrap-btn.active,
-div.highlighter-rouge .code-wrap-btn.active:hover {
-  color: #61afef;
-  border-color: fade(#61afef, 45%);
-  background: fade(#61afef, 12%);
-}
-
-// Touch devices never hover, so the buttons have to be visible by default there.
+// Touch devices never hover, so the controls have to be visible by default.
 div.highlighter-rouge:hover .code-copy-btn,
-div.highlighter-rouge:hover .code-wrap-btn,
+div.highlighter-rouge:hover .code-switch-wrap,
 div.highlighter-rouge:focus-within .code-copy-btn,
-div.highlighter-rouge:focus-within .code-wrap-btn {
+div.highlighter-rouge:focus-within .code-switch-wrap {
   opacity: 1;
 }
 @media (hover: none) {
   .code-copy-btn,
-  .code-wrap-btn {
+  .code-switch-wrap {
     opacity: 1;
   }
+}
+
+// -- Line numbers, as CSS counters
+//
+// js/hux-blog.js rebuilds the code as `<span class="code-line">` elements, one
+// per source line, and drops Rouge's gutter cell. A number rendered from a
+// counter lives inside its own line, so when a line wraps the row grows with
+// its number and the two stay aligned — which the old two-cell table could not
+// do, because the gutter and the code were numbered only by shared index.
+//
+// Numbering is drawn in ::before with `position: absolute`, so it sits in a
+// hanging indent outside the text and never lands in a selection or a copy.
+article .post-container div.highlighter-rouge .code-lines {
+  display: block;
+  counter-reset: code-line;
+}
+
+// The theme styles `pre code` (display: block, white-space: pre). A line is a
+// block of its own so each one gets a row, and inherits wrapping from the
+// `.code-wrap` rules below.
+article .post-container div.highlighter-rouge .code-line {
+  display: block;
+  position: relative;
+  counter-increment: code-line;
+  // Hanging indent: room for the number, which is absolutely positioned.
+  padding-left: 3.4em;
+  // A long line must be able to exceed the block so the scroller still engages.
+  min-width: max-content;
+}
+
+article .post-container div.highlighter-rouge .code-line::before {
+  content: counter(code-line);
+  position: absolute;
+  left: 0;
+  width: 2.6em;
+  padding-right: 0.8em;
+  text-align: right;
+  color: #636d83;
+  // Purely presentational: keep it out of text selection and clipboard copies.
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 // -- Optional line wrapping, toggled per code block by js/hux-blog.js
@@ -442,10 +541,16 @@ article .post-container div.highlighter-rouge.code-wrap {
   }
   .highlight pre,
   pre,
-  pre code {
+  pre code,
+  .code-line {
     white-space: pre-wrap;
     word-break: break-word;
     overflow-wrap: anywhere;
+  }
+  // `min-width: max-content` above would keep the line as wide as its longest
+  // unwrapped run, defeating the reflow.
+  .code-line {
+    min-width: 0;
   }
 }
 
