@@ -15,6 +15,7 @@ node_modules
 !/Gemfile.lock
 
 # ide
+.claude
 
 # macOS / editor droppings, at any depth.
 **/.DS_Store
