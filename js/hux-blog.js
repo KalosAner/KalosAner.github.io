@@ -33,6 +33,30 @@ $(document).ready(function() {
     $("table").addClass("table");
 });
 
+// Lazy-load post images.
+//
+// The 300+ images in posts are plain <img> tags produced by Markdown, so there
+// is no template to add `loading="lazy"` to. Doing it here keeps 169 posts
+// untouched and degrades to eager loading when JS is off.
+//
+// The first image is deliberately left eager: it is normally the largest
+// element above the fold, and lazy-loading the LCP candidate makes the page
+// feel slower, not faster.
+$(document).ready(function() {
+    $("article .post-container img").each(function(index) {
+        if (index === 0) {
+            // Not `loading="eager"` — leaving the attribute off is the same
+            // thing, and fetching it early helps LCP.
+            this.setAttribute("fetchpriority", "high");
+            return;
+        }
+        this.setAttribute("loading", "lazy");
+        // Chrome/Safari need this to keep the decoded image off the main
+        // thread; harmless where it is not supported.
+        this.setAttribute("decoding", "async");
+    });
+});
+
 // Code block chrome: a language label, a line-wrap toggle and a copy button,
 // added to every rouge-highlighted block in a post. Markup is generated here
 // rather than in the layouts so that posts render identically without JS.

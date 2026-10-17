@@ -3,6 +3,9 @@ title: Repost
 layout: page
 description: "「新竹高于旧竹枝，全凭老干为扶持。」"
 header-img: "img/repost-bg-2026.jpg"
+# Kept out of sitemap.xml to match robots.txt (Disallow: /repost/); listing a
+# page as "crawl me" while robots says otherwise is contradictory.
+sitemap: false
 ---
 
 {% assign paginator = site.repost | sort: 'date' | reverse %}

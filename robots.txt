@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Private / duplicate content. These are also excluded from sitemap.xml in
+# _config.yml; this keeps crawlers from reaching them by following links.
+Disallow: /notes/
+Disallow: /repost/
+
+Sitemap: https://KalosAner.github.io/sitemap.xml

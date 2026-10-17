@@ -1,25 +1,52 @@
-{% if page.page-mathjax or site.page-mathjax %}
-<!-- MathJax 支持 -->
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true
-    },
-    svg: { fontCache: 'global' }
-  };
-</script>
-
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
-{% endif %}
-
 <head>
     <meta charset="utf-8">
+
+    {% comment %}
+    MathJax is opt-in per page: nothing in the site uses it today, and loading
+    it unconditionally cost every visitor two scripts on every page. Enable it
+    by putting `page-mathjax: true` in a post's front matter.
+
+    This block used to sit *above* `<head>`, where the browser would hoist it
+    out of position; it belongs inside the head.
+    {% endcomment %}
+    {% if page.page-mathjax %}
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        svg: { fontCache: 'global' }
+      };
+    </script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    {% endif %}
+
+    {% comment %}
+    Google Analytics 4.
+
+    This has to be in <head>: Search Console verifies site ownership through
+    Google Analytics only when it finds the tag there, and the "tracking code
+    is not in the <head>" error is what a copy in the footer produces.
+
+    The emptiness test is spelled out because Liquid treats "" as truthy, so a
+    bare `{% raw %}{% if site.ga_track_id %}{% endraw %}` would still emit a tag
+    with an empty id when `ga_track_id` is left blank.
+    {% endcomment %}
+    {% if site.ga_track_id and site.ga_track_id != "" %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_track_id }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', '{{ site.ga_track_id }}');
+    </script>
+    {% endif %}
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="description" content="{{ site.description }}">
     <meta name="keywords" content="{{ site.keyword }}">

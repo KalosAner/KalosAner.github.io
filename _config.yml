@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: Freelypro@gmail.com
 description: "山穷水复疑无路，柳暗花明又一村。"
 keyword: "KalosAner, KalosAner, @KalosAner, KalosAner的博客, KalosAner Blog, 博客, 个人网站, 互联网, 后端"
-url: "https://KalosAner.github.io/" # your host, for absolute URL
+url: "https://KalosAner.github.io" # your host, for absolute URL (no trailing slash: Jekyll appends "/" itself, and a trailing slash here produces "//" in sitemap.xml and feed.xml)
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
@@ -33,6 +33,12 @@ exclude:
     "package.json",
     "README.md",
     "README.zh.md",
+    # Large reference material (143MB) that is never served from the site:
+    # every link into it points at the GitHub blob view instead. Shipping it
+    # would copy all of it into _site on each build and every deploy.
+    "resource",
+    # A vendored copy of a third-party project, unrelated to the blog.
+    "Cpp_Primer_Answers-master",
   ]
 anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:
@@ -42,7 +48,7 @@ anchorjs: true # if you want to customize anchor. check out line:181 of `post.ht
 # from PR#40, to support local preview for Jekyll 3.0
 # make sure you have this gem installed
 # `$ gem install jekyll-paginate`
-plugins: [jekyll-paginate]
+plugins: [jekyll-paginate, jekyll-sitemap]
 
 # Markdown settings
 # replace redcarpet to kramdown,
@@ -72,9 +78,14 @@ netease_comment: false
 # Baidu Analytics
 # ba_track_id: [your track id]
 
-# Google Analytics
-ga_track_id: "UA-49627206-1" # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+# Google Analytics 4 — put your own measurement ID here (looks like G-XXXXXXXXXX,
+# from analytics.google.com > Admin > Data streams > Web).
+#
+# The value that used to be here (UA-49627206-1 / ga_domain: huangxuan.me) was
+# the theme author's: it sent this site's traffic to his property, and it was a
+# Universal Analytics ID, which Google shut down in July 2023. Leaving any
+# ga_track_id set now emits a GA4 tag instead; leave it blank to load nothing.
+ga_track_id: "G-CXKYP3KNVN"
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
@@ -89,8 +100,11 @@ featured-condition-size: 1 # A tag will be featured if the size of it is more th
 chrome-tab-theme-color: "#000000"
 service-worker: true
 
-# MathJax rendering for layout:page (e.g. post preview)
-page-mathjax: true
+# MathJax is opt-in per page. Set `page-mathjax: true` in a post's front
+# matter to load it; nothing is loaded otherwise. No post uses math today, and
+# previously every page paid for both MathJax v3 (head.html) and v2.7.5 (the
+# layouts), so the default off is both faster and conflict-free.
+page-mathjax: false
 
 collections:
   academic:
@@ -99,6 +113,25 @@ collections:
     output: true   # 确保生成 HTML 文件
   repost:
     output: true   # 确保生成 HTML 文件
+
+# Sitemap exclusions.
+#
+# jekyll-sitemap filters on each *document's* `sitemap` key, not on the
+# collection's, so this has to be expressed as front-matter defaults rather
+# than under `collections:` above (setting it there silently does nothing).
+defaults:
+  - scope:
+      type: notes
+    values:
+      # Personal essays (《夹克衫的故事》and the like). They stay online, but
+      # search engines are kept from indexing them.
+      sitemap: false
+  - scope:
+      type: repost
+    values:
+      # Republished articles that already exist elsewhere; indexing them here
+      # would compete with the originals as duplicate content.
+      sitemap: false
 
 
 

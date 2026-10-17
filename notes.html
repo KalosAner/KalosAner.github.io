@@ -3,6 +3,9 @@ title: Notes
 layout: page
 description: "「读书不觉已春深，一寸光阴一寸金。」"
 header-img: "img/home-bg-notes.jpg"
+# Kept out of sitemap.xml to match robots.txt (Disallow: /notes/); listing a
+# page as "crawl me" while robots says otherwise is contradictory.
+sitemap: false
 ---
 
 {% assign paginator = site.notes | sort: 'date' | reverse %}

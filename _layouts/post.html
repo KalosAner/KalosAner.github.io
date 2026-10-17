@@ -116,10 +116,11 @@ layout: default
     </div>
 </article>
 
-<!-- add support for mathjax by voleking-->
-{% if page.mathjax %}
-  {% include mathjax_support.html %}
-{% endif %}
+{% comment %}
+MathJax is loaded from _includes/head.html, gated on `page.page-mathjax`.
+This layout used to include a second, older MathJax (v2.7.5) gated on a
+different flag, so a page could load two incompatible versions.
+{% endcomment %}
 
 {% if site.netease_comment %}
 <!-- 网易云跟帖JS代码 start -->
