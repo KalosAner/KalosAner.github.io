@@ -47,6 +47,20 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+      # `jekyll build` can exit 0 while emitting zero-byte pages and an empty
+      # _posts collection (this happened once and deployed a blank site that
+      # still returned HTTP 200). Fail the job instead of shipping a blank site.
+      - name: Sanity-check build output
+        run: |
+          set -euo pipefail
+          test -s _site/index.html || { echo "::error::_site/index.html is missing or empty"; exit 1; }
+          # Every post is emitted under <yyyy>/<mm>/<dd>/...; count them.
+          posts=$(find _site -path '*/20[0-9][0-9]/[0-9][0-9]/[0-9][0-9]/*' -name index.html | wc -l)
+          echo "generated post pages: $posts"
+          if [ "$posts" -lt 50 ]; then
+            echo "::error::only $posts post pages were generated - _posts was not rendered"
+            exit 1
+          fi
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3

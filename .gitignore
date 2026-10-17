@@ -8,11 +8,14 @@ node_modules
 *.log
 .jekyll-cache
 
-# Gemfile.lock must stay tracked: CI (actions/setup-ruby with bundler-cache)
-# reads it to decide which gem versions to install. Without it every build
-# re-resolves dependencies, so an upstream release can break the build with no
-# change on our side.
-!/Gemfile.lock
+# Gemfile.lock stays untracked ON PURPOSE.
+#
+# It used to be committed, and that broke the deployed site: the lock was
+# generated on local Ruby 2.6 / Bundler 1.17, while CI runs Ruby 3.1 (Bundler
+# 2.x). Under that mismatched lock the CI build silently produced zero-byte
+# HTML pages and an empty _posts collection. Do not commit it back unless the
+# whole toolchain is pinned to one environment, including a .ruby-version file.
+/Gemfile.lock
 
 # ide
 .claude
