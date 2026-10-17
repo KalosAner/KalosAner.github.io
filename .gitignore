@@ -6,9 +6,29 @@ _archive
 node_modules
 .vscode
 *.log
-*.lock
-*.sh
-.DS_Store
 .jekyll-cache
-*/.DS_Store
-*/*/.DS_Store
+
+# Gemfile.lock must stay tracked: CI (actions/setup-ruby with bundler-cache)
+# reads it to decide which gem versions to install. Without it every build
+# re-resolves dependencies, so an upstream release can break the build with no
+# change on our side.
+!/Gemfile.lock
+
+# ide
+
+# macOS / editor droppings, at any depth.
+**/.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Local-only helper scripts.
+*.sh
+!apush.sh
+
+# OS temp artifacts from assorted editors/tools.
+*~
+*.swp
+*.swo
+Thumbs.db
+desktop.ini
