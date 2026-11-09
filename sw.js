@@ -9,7 +9,24 @@
 // CACHE_NAMESPACE
 // CacheStorage is shared between all sites under same domain.
 // A namespace can prevent potential name conflicts and mis-deletion.
-const CACHE_NAMESPACE = 'main-'
+//
+// The trailing version is what actually retires stale assets. Two problems came
+// from leaving it out:
+//
+//  1. `activate` only deletes names in DEPRECATED_CACHES, so a new worker kept
+//     writing into the *same* bucket as the old one. `install` re-added the
+//     precache list on top of the existing entries, and any file whose add
+//     failed (a 404, a flaky network) left the previous copy in place forever.
+//     Bumping the version makes the new worker start from an empty bucket, so
+//     every precached file is re-fetched from the network exactly once.
+//
+//  2. index.html is precached as "./" and served from that bucket, so a page
+//     could pair an old HTML shell with new CSS/JS (or the reverse) and render
+//     broken. A new version keeps HTML and assets in step.
+//
+// Bump this whenever sw.js or PRECACHE_LIST meaningfully changes.
+const CACHE_VERSION = 'v3';
+const CACHE_NAMESPACE = 'main-' + CACHE_VERSION + '-'
 
 const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
 const PRECACHE_LIST = [
@@ -29,10 +46,16 @@ const PRECACHE_LIST = [
   // "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/fonts/fontawesome-webfont.woff2?v=4.6.3",
   // "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"
 ]
+// Hosts whose requests the worker is allowed to intercept and cache.
+//
+// `huangxuan.me` and `yanshuo.io` used to be listed here because they were the
+// theme author's other sites; nothing on this blog is served from them, and
+// leaving them in had the worker claim requests to domains it does not own.
+//
+// cdnjs stays: head.html, footer.html and the post/keynote layouts still load
+// Font Awesome, fastclick, anchor-js and MathJax from it.
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
-  "huangxuan.me",
-  "yanshuo.io",
   "cdnjs.cloudflare.com"
 ]
 const DEPRECATED_CACHES = ['precache-v1', 'runtime', 'main-precache-v1', 'main-runtime']
@@ -117,14 +140,24 @@ self.addEventListener('install', e => {
  *  waitUntil(): activating ====> activated
  */
 self.addEventListener('activate', event => {
-  // delete old deprecated caches.
-  caches.keys().then(cacheNames => Promise.all(
-    cacheNames
-      .filter(cacheName => DEPRECATED_CACHES.includes(cacheName))
-      .map(cacheName => caches.delete(cacheName))
-  ))
-  console.log('service worker activated.')
-  event.waitUntil(self.clients.claim());
+  // Drop every cache except the current one.
+  //
+  // Filtering on DEPRECATED_CACHES alone meant caches from earlier versions
+  // survived forever, because they were never named in that array (every past
+  // version used the same name, "main-precache-then-runtime"). Deleting
+  // anything that is not CACHE also covers those, and CACHE_NAMESPACE is a
+  // prefix of every name this site has ever written, so unrelated caches on
+  // the same origin are left alone.
+  event.waitUntil(
+    caches.keys()
+      .then(cacheNames => Promise.all(
+        cacheNames
+          .filter(name => name !== CACHE && name.startsWith('main-'))
+          .map(name => caches.delete(name))
+      ))
+      .then(() => self.clients.claim())
+      .then(() => console.log('service worker activated, cache =', CACHE))
+  );
 });
 
 
