@@ -25,7 +25,7 @@
 //     broken. A new version keeps HTML and assets in step.
 //
 // Bump this whenever sw.js or PRECACHE_LIST meaningfully changes.
-const CACHE_VERSION = 'v5';
+const CACHE_VERSION = 'v6';
 const CACHE_NAMESPACE = 'main-' + CACHE_VERSION + '-'
 
 const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';

@@ -740,8 +740,9 @@ article .post-container div.highlighter-rouge .code-lines {
   counter-reset: code-line;
 }
 article .post-container div.highlighter-rouge .code-line {
-  display: block;
-  position: relative;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
   counter-increment: code-line;
   padding-left: 3.4em;
   min-width: max-content;
@@ -749,10 +750,8 @@ article .post-container div.highlighter-rouge .code-line {
 }
 article .post-container div.highlighter-rouge .code-line::before {
   content: counter(code-line);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2.6em;
+  flex: 0 0 2.6em;
+  margin-left: -3.4em;
   padding-right: 0.8em;
   text-align: right;
   color: #636d83;
@@ -772,6 +771,7 @@ article .post-container div.highlighter-rouge.code-wrap .code-line {
   overflow-wrap: anywhere;
 }
 article .post-container div.highlighter-rouge.code-wrap .code-line {
+  flex-wrap: wrap;
   min-width: 0;
 }
 .search-page {
