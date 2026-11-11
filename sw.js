@@ -25,7 +25,7 @@
 //     broken. A new version keeps HTML and assets in step.
 //
 // Bump this whenever sw.js or PRECACHE_LIST meaningfully changes.
-const CACHE_VERSION = 'v6';
+const CACHE_VERSION = 'v7';
 const CACHE_NAMESPACE = 'main-' + CACHE_VERSION + '-'
 
 const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
@@ -215,7 +215,27 @@ self.addEventListener('fetch', event => {
       return;
     }
 
-    // Stale-while-revalidate for possiblily dynamic content
+    // Cache-first for static assets: these have versioned URLs (?v=...) and
+    // the CACHE_VERSION bump ensures the SW precaches fresh copies on update.
+    // Returning from cache avoids a network round-trip on every page load, which
+    // keeps subsequent visits fast. HTML navigation still uses stale-while-
+    // revalidate below so content updates are still picked up.
+    if (endWithExtension(event.request) && !isNavigationReq(event.request)) {
+      event.respondWith(
+        caches.match(event.request).then(cached => {
+          if (cached) return cached;
+          return fetch(getCacheBustingUrl(event.request), { cache: "no-store" })
+            .then(resp => {
+              const copy = resp.clone();
+              caches.open(CACHE).then(cache => cache.put(event.request, copy));
+              return resp;
+            });
+        })
+      );
+      return;
+    }
+
+    // Stale-while-revalidate for possibly dynamic content
     // similar to HTTP's stale-while-revalidate: https://www.mnot.net/blog/2007/12/12/stale
     // Upgrade from Jake's to Surma's: https://gist.github.com/surma/eb441223daaedf880801ad80006389f1
     const cached = caches.match(event.request);

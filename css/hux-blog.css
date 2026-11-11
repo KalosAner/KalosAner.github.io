@@ -740,9 +740,7 @@ article .post-container div.highlighter-rouge .code-lines {
   counter-reset: code-line;
 }
 article .post-container div.highlighter-rouge .code-line {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: nowrap;
+  display: block;
   counter-increment: code-line;
   padding-left: 3.4em;
   min-width: max-content;
@@ -750,7 +748,9 @@ article .post-container div.highlighter-rouge .code-line {
 }
 article .post-container div.highlighter-rouge .code-line::before {
   content: counter(code-line);
-  flex: 0 0 2.6em;
+  display: inline-block;
+  vertical-align: baseline;
+  width: 2.6em;
   margin-left: -3.4em;
   padding-right: 0.8em;
   text-align: right;
@@ -771,7 +771,6 @@ article .post-container div.highlighter-rouge.code-wrap .code-line {
   overflow-wrap: anywhere;
 }
 article .post-container div.highlighter-rouge.code-wrap .code-line {
-  flex-wrap: wrap;
   min-width: 0;
 }
 .search-page {

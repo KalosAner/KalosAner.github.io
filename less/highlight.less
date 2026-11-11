@@ -498,21 +498,19 @@ div.highlighter-rouge:focus-within .code-switch-wrap {
 // its number and the two stay aligned — which the old two-cell table could not
 // do, because the gutter and the code were numbered only by shared index.
 //
-// Numbering is drawn in ::before as the first flex item of the line. This
-// keeps it in the row's flow (so it aligns with the code) while `user-select:
-// none` keeps it out of text selections and clipboard copies.
+// Numbering is drawn in ::before as an inline-block at the start of the line.
+// This keeps it in the row's flow (so it aligns with the code) while
+// `user-select: none` keeps it out of text selections and clipboard copies.
 article .post-container div.highlighter-rouge .code-lines {
   display: block;
   counter-reset: code-line;
 }
 
 // The theme styles `pre code` (display: block, white-space: pre). A line is a
-// flex row of its own so each one gets a row, and inherits wrapping from the
+// block of its own so each one gets a row, and inherits wrapping from the
 // `.code-wrap` rules below.
 article .post-container div.highlighter-rouge .code-line {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: nowrap;
+  display: block;
   counter-increment: code-line;
   // Hanging indent: room for the number.
   padding-left: 3.4em;
@@ -525,7 +523,9 @@ article .post-container div.highlighter-rouge .code-line {
 
 article .post-container div.highlighter-rouge .code-line::before {
   content: counter(code-line);
-  flex: 0 0 2.6em;
+  display: inline-block;
+  vertical-align: baseline;
+  width: 2.6em;
   margin-left: -3.4em;
   padding-right: 0.8em;
   text-align: right;
@@ -561,7 +561,6 @@ article .post-container div.highlighter-rouge.code-wrap {
   // `min-width: max-content` above would keep the line as wide as its longest
   // unwrapped run, defeating the reflow.
   .code-line {
-    flex-wrap: wrap;
     min-width: 0;
   }
 }
