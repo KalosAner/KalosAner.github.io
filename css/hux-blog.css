@@ -740,15 +740,18 @@ article .post-container div.highlighter-rouge .code-line {
   counter-increment: code-line;
   padding-left: 3.4em;
   min-width: max-content;
+  line-height: 1.5;
 }
 article .post-container div.highlighter-rouge .code-line::before {
   content: counter(code-line);
   position: absolute;
+  top: 0;
   left: 0;
   width: 2.6em;
   padding-right: 0.8em;
   text-align: right;
   color: #636d83;
+  line-height: 1.5;
   user-select: none;
   -webkit-user-select: none;
 }

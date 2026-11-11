@@ -511,16 +511,22 @@ article .post-container div.highlighter-rouge .code-line {
   padding-left: 3.4em;
   // A long line must be able to exceed the block so the scroller still engages.
   min-width: max-content;
+  // Explicit line-height so the number in ::before aligns with the code text
+  // regardless of font fallback, zoom, or inherited line-height differences.
+  line-height: 1.5;
 }
 
 article .post-container div.highlighter-rouge .code-line::before {
   content: counter(code-line);
   position: absolute;
+  top: 0;
   left: 0;
   width: 2.6em;
   padding-right: 0.8em;
   text-align: right;
   color: #636d83;
+  // Match the code-line's line-height so the number sits exactly on the line.
+  line-height: 1.5;
   // Purely presentational: keep it out of text selection and clipboard copies.
   user-select: none;
   -webkit-user-select: none;
