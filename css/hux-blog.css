@@ -551,8 +551,13 @@ pre.highlight {
   width: 56px;
 }
 .highlighter-rouge .highlight .lineno {
+  display: block;
   text-align: right;
   border-radius: 0px;
+  line-height: 1.5;
+  color: #636d83;
+  user-select: none;
+  -webkit-user-select: none;
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
