@@ -19,6 +19,8 @@ node_modules
 
 # ide
 .claude
+.workbuddy
+.vscode
 
 # macOS / editor droppings, at any depth.
 **/.DS_Store

@@ -59,3 +59,20 @@
     }
   }
 }
+
+// Google AdSense slot in the sidebar.
+//
+// The ad unit frequently comes back without a fill (narrow column, site
+// review, ad blocker, region) and AdSense leaves an empty, bordered <ins>
+// behind, which reads as a mysterious blank box under the FRIENDS list.
+// Collapse the slot when it reports "unfilled" so nothing is left hanging,
+// while a served ad keeps its place.
+.sidebar-container {
+  ins.adsbygoogle {
+    margin: 20px 0;
+  }
+}
+
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}

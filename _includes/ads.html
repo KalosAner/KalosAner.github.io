@@ -1,4 +1,11 @@
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+{% comment %}
+  adsbygoogle.js is already loaded once, globally, in _includes/head.html.
+  Do NOT add a second <script src=".../adsbygoogle.js"> here: the duplicate
+  request trips the "All ins elements in the DOM with class=adsbygoogle
+  already have ads in them" warning.
+  Empty slots (data-ad-status="unfilled") are collapsed in less/sidebar.less,
+  so a no-fill response no longer leaves a blank bordered box in the sidebar.
+{% endcomment %}
 <!-- first shot -->
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6487568398225121" data-ad-slot="4814308751"
      data-ad-format="auto" data-full-width-responsive="true"></ins>
