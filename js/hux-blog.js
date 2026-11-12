@@ -231,6 +231,14 @@ $(document).ready(function() {
             // (padding, font, background) applying exactly as before.
         }
 
+        // Size the gutter from the widest number it has to hold: `123` and
+        // `1234` need different amounts of room, and a gutter that is too
+        // narrow is what forced the number to break once wrapping was on.
+        var count = $block.find(".code-line").length;
+        if (count) {
+            $block[0].style.setProperty("--code-line-digits", String(count).length);
+        }
+
         var lang = languageOf($block);
         var $header = $("<div class='code-block-header'></div>");
         var $label = $("<span class='code-block-lang'></span>").text(lang);

@@ -578,6 +578,13 @@ article .post-container div.highlighter-rouge {
   margin: 22px 0;
   border-radius: 12px;
   overflow: hidden;
+  /* Width of the line-number gutter. One digit is one `ch` of the block's
+     monospace font, plus the gap that separates the number from the code.
+     js/hux-blog.js overrides --code-line-digits per block from the real line
+     count, so a 4-digit block gets the room a 4-digit number needs while a
+     small block keeps a tight gutter. */
+  --code-line-digits: 3;
+  --code-gutter: calc(var(--code-line-digits) * 1ch + 0.8em);
 }
 article .post-container div.highlighter-rouge .highlight {
   margin-bottom: 0;
@@ -742,7 +749,7 @@ article .post-container div.highlighter-rouge .code-lines {
 article .post-container div.highlighter-rouge .code-line {
   display: block;
   counter-increment: code-line;
-  padding-left: 3.4em;
+  padding-left: var(--code-gutter);
   min-width: max-content;
   line-height: 1.5;
 }
@@ -750,10 +757,20 @@ article .post-container div.highlighter-rouge .code-line::before {
   content: counter(code-line);
   display: inline-block;
   vertical-align: baseline;
-  width: 2.6em;
-  margin-left: -3.4em;
+  box-sizing: border-box;
+  width: var(--code-gutter);
+  margin-left: calc(-1 * var(--code-gutter));
   padding-right: 0.8em;
   text-align: right;
+  /* The Wrap switch puts `pre-wrap` / `break-word` / `anywhere` on `.code-line`
+     and all three inherit into this pseudo-element. Three digits sit right on
+     the edge of the space available, so the `anywhere` rule broke them
+     mid-number (`151` became `15` / `1`): the code was pushed onto the second
+     row and every number below drifted out of step. The number is a gutter
+     label, never code, so it must never wrap. */
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
   color: #636d83;
   line-height: 1.5;
   user-select: none;
