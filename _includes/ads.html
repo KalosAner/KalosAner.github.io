@@ -3,12 +3,43 @@
   Do NOT add a second <script src=".../adsbygoogle.js"> here: the duplicate
   request trips the "All ins elements in the DOM with class=adsbygoogle
   already have ads in them" warning.
-  Empty slots (data-ad-status="unfilled") are collapsed in less/sidebar.less,
-  so a no-fill response no longer leaves a blank bordered box in the sidebar.
+
+  Why the watchdog below exists: this sidebar slot usually comes back with no
+  fill, and AdSense then leaves an empty <div id="aswift_N_host"> inside the
+  <ins> with a reserved height (~280px) and sometimes a 1px currentColor
+  border. Because the page colour is #bfbfbf, that renders as the blank grey
+  box under FRIENDS. `data-ad-status` is NOT reliable here: it is missing on
+  many loads, so a pure CSS `[data-ad-status="unfilled"]` rule misses the
+  box. A filled slot always contains an <iframe> with a real height, so we
+  collapse the wrapper only while no iframe is present.
 {% endcomment %}
-<!-- first shot -->
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6487568398225121" data-ad-slot="4814308751"
-     data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<div class="sidebar-ad-slot">
+  <!-- first shot -->
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6487568398225121" data-ad-slot="4814308751"
+       data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+  <script>
+    (function () {
+      var host = document.currentScript.parentNode;
+      var slot = host.querySelector('ins.adsbygoogle');
+      if (!host || !slot) return;
+
+      var isFilled = function () {
+        if (slot.getAttribute('data-ad-status') === 'filled') return true;
+        var frame = slot.querySelector('iframe');
+        return !!(frame && frame.offsetHeight > 10);
+      };
+
+      var ticks = 0;
+      var timer = setInterval(function () {
+        ticks++;
+        // Grace period: leave the slot alone while the auction is still open,
+        // otherwise AdSense may treat a hidden slot as non-servable.
+        if (ticks > 6) host.classList.toggle('is-empty', !isFilled());
+        if (ticks >= 60) clearInterval(timer);
+      }, 500);
+    })();
+  </script>
+</div>

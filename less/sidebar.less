@@ -63,14 +63,23 @@
 // Google AdSense slot in the sidebar.
 //
 // The ad unit frequently comes back without a fill (narrow column, site
-// review, ad blocker, region) and AdSense leaves an empty, bordered <ins>
-// behind, which reads as a mysterious blank box under the FRIENDS list.
-// Collapse the slot when it reports "unfilled" so nothing is left hanging,
-// while a served ad keeps its place.
+// review, ad blocker, region) and AdSense leaves an empty host <div> with a
+// reserved height (and sometimes a 1px currentColor border = @gray-light)
+// inside the <ins>, which reads as a mysterious blank box under FRIENDS.
+//
+// `data-ad-status` is not dependable — it is absent on plenty of loads — so
+// _includes/ads.html also runs a watchdog that flags the wrapper with
+// `.is-empty` whenever no ad iframe is present. Both hooks collapse the slot.
 .sidebar-container {
   ins.adsbygoogle {
     margin: 20px 0;
+    max-width: 100% !important;
+    overflow: hidden;
   }
+}
+
+.sidebar-ad-slot.is-empty {
+  display: none !important;
 }
 
 ins.adsbygoogle[data-ad-status="unfilled"] {

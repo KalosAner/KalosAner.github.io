@@ -2082,6 +2082,11 @@ img::-moz-selection {
 }
 .sidebar-container ins.adsbygoogle {
   margin: 20px 0;
+  max-width: 100% !important;
+  overflow: hidden;
+}
+.sidebar-ad-slot.is-empty {
+  display: none !important;
 }
 ins.adsbygoogle[data-ad-status="unfilled"] {
   display: none !important;
