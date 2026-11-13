@@ -2085,6 +2085,9 @@ img::-moz-selection {
   max-width: 100% !important;
   overflow: hidden;
 }
+.adsbygoogle iframe {
+  border: 0 !important;
+}
 .sidebar-ad-slot.is-empty {
   display: none !important;
 }

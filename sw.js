@@ -40,7 +40,7 @@ const PRECACHE_LIST = [
   "./img/avatar-hux.jpg",
   "./img/home-bg-o.jpg",
   "./img/404-bg.jpg",
-  "./css/hux-blog.min.css?v=5",
+  "./css/hux-blog.min.css?v=6",
   "./css/bootstrap.min.css"
   // "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css",
   // "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/fonts/fontawesome-webfont.woff2?v=4.6.3",

@@ -44,8 +44,14 @@ layout: default
       <!-- Friends Blog -->
       {% include friends.html %}
 
-      <!-- Ads -->
-      {% include ads.html %}
+      {% comment %}
+        The AdSense unit that used to sit here never filled in this 250px-wide
+        column: AdSense answered with an empty, height-reserved iframe whose
+        default border painted the grey rectangle under FRIENDS. Collapsing it
+        from CSS/JS depended on attributes AdSense does not set consistently,
+        so the slot is simply gone. If ads come back, serve them full width
+        below the post list, not in the sidebar.
+      {% endcomment %}
     </div>
     {% endif %}
   </div>
